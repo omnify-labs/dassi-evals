@@ -7,7 +7,7 @@ Full results, per-task logs and grading details for [Dassi](https://dassi.ai) on
 
 Dassi is a Chrome extension. It was run as shipped (release 0.74.1) on its default model, `gemini-3.8-flash`, with one attempt per task.
 
-> **How these were graded.** Scores are from automated LLM judges that we ran ourselves: `gemini-3.5-flash-lite` for Odysseys rubrics, and the Online-Mind2Web WebJudge pipeline on a `gemini-3.1-pro-preview` backbone. They have not been submitted to or verified by either benchmark's maintainers. [METHODOLOGY.md](METHODOLOGY.md) lists every difference from the reference protocols.
+> **How these were graded.** Scores come from automated LLM judges that we ran ourselves, all on `gemini-3.5-flash-lite`. Odysseys is graded rubric by rubric. Online-Mind2Web is graded on whether the final result is right, however the agent got there. We also report Online-Mind2Web's own WebJudge, which grades the process too. None of these scores has been submitted to or verified by either benchmark's maintainers. [METHODOLOGY.md](METHODOLOGY.md) lists every difference from the reference protocols.
 
 ## Results
 
@@ -28,8 +28,9 @@ Dassi is a Chrome extension. It was run as shipped (release 0.74.1) on its defau
 
 | Metric | Dassi (`gemini-3.8-flash`) |
 |---|---|
-| WebJudge success | **TBD / 300** |
+| Correct result (answer judge) | **TBD / 300** |
 | Easy / Medium / Hard | TBD / TBD / TBD |
+| WebJudge, which also grades the process | TBD / 300 |
 | Median tool calls per task | TBD |
 | Median cost per task | TBD |
 

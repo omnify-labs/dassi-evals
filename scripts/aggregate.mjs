@@ -117,8 +117,11 @@ if (identities.size !== 1) {
 }
 const identity = JSON.parse([...identities][0]);
 
-/** OM2W is scored by the trajectory WebJudge; Odysseys by the rubric judge (success = every rubric passed). */
-const verdictField = args.dataset === 'om2w' ? 'judgedOfficial' : 'judged';
+/**
+ * `judged` is the headline on both: Odysseys' rubric judge (every rubric passed) and
+ * OM2W's answer-correctness judge. OM2W's trajectory WebJudge is kept as `webjudge`.
+ */
+const verdictField = 'judged';
 
 const perTask = tasks.map((t) => {
   const row = rows.get(t.id);
@@ -130,6 +133,7 @@ const perTask = tasks.map((t) => {
     status: row?.status ?? 'missing',
     success: row?.[verdictField] === 'success',
     verdict: row?.[verdictField] ?? '',
+    ...(args.dataset === 'om2w' ? { webjudge: row?.judgedOfficial ?? '' } : {}),
     rubrics_passed: row?.rubricScore?.passed ?? '',
     rubrics_total: row?.rubricScore?.total ?? '',
     rubric_score: row?.rubricScore?.score ?? (args.dataset === 'odysseys' ? 0 : ''),
@@ -159,6 +163,8 @@ function summarize(group) {
     out.rubric_avg = mean(group.map((t) => Number(t.rubric_score) || 0));
     out.rubrics_passed = group.reduce((a, t) => a + (Number(t.rubrics_passed) || 0), 0);
     out.rubrics_total = group.reduce((a, t) => a + (Number(t.rubrics_total) || 0), 0);
+  } else {
+    out.webjudge_success = group.filter((t) => t.webjudge === 'success').length;
   }
   return out;
 }
@@ -168,7 +174,7 @@ const summary = {
   metric:
     args.dataset === 'odysseys'
       ? 'success = every rubric of the task passed ("Perfect"); rubric_avg = mean per-task rubric score'
-      : 'success = WebJudge (trajectory) verdict',
+      : 'success = answer-correctness judge (is the final result right?); webjudge_success = trajectory WebJudge, secondary',
   ...identity,
   shards,
   overall: summarize(perTask),
@@ -222,7 +228,8 @@ for (const [taskId, row] of rows) {
 }
 
 const pct = (x) => (x * 100).toFixed(1) + '%';
-console.log(`${args.dataset}: ${summary.overall.success}/${summary.overall.tasks} = ${pct(summary.overall.success_rate)}  (agent ${identity.model}, judge ${args.dataset === 'om2w' ? identity.officialJudgeVersion : identity.judgeModel})`);
+console.log(`${args.dataset}: ${summary.overall.success}/${summary.overall.tasks} = ${pct(summary.overall.success_rate)}  (agent ${identity.model}, judge ${identity.judgeModel})`);
+if (args.dataset === 'om2w') console.log(`  WebJudge (secondary): ${summary.overall.webjudge_success}/${summary.overall.tasks}`);
 for (const [level, s] of Object.entries(summary.by_level)) console.log(`  ${level.padEnd(7)} ${s.success}/${s.tasks} = ${pct(s.success_rate)}`);
 if (summary.not_reported_by_any_shard.length) console.log(`  WARNING: ${summary.not_reported_by_any_shard.length} task(s) reported by no shard — scored as failures`);
 if (summary.never_started_not_rerun.length) console.log(`  WARNING: ${summary.never_started_not_rerun.length} task(s) never started and not re-run: ${summary.never_started_not_rerun.join(', ')}`);

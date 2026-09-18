@@ -63,10 +63,21 @@ Grading is automated. We use our own judge configuration, described here in full
 
 ### Online-Mind2Web
 
-- Judge: the benchmark's **WebJudge** pipeline (key-point extraction → per-screenshot relevance scoring → final verdict) at upstream commit `f0d805ee0e9e0b3ea70911e45e5264b72968f3dc`, prompts and thresholds unchanged.
-- Backbone model: **`gemini-3.1-pro-preview`**. The official leaderboard uses `o4-mini`.
-- Evidence: the official format is one screenshot per UI action. Much of Dassi's work happens in code, so each REPL call is exported as an action with its source code and returned text, alongside its screenshot. Up to 50 relevant screenshots are kept, spread across the trajectory and always including the first and last relevant ones. This is identified in every result as `dassi-webjudge-evidence-v1`.
-- WebJudge grades the trajectory, not just the answer: a correct final answer reached without on-page evidence can still be marked a failure.
+**Headline: is the result right?** We grade whether the agent's final result satisfies the task, not how it got there. Filtering or sorting a site's data in code counts the same as clicking the site's filter.
+
+- Judge model: **`gemini-3.5-flash-lite`**, one call per task.
+- The judge sees the task text, the agent's final answer, and the last 3 screenshots of the run.
+- It is told not to penalize the navigation path, and to use the screenshots to catch answers they contradict or that look made up.
+- A task with no final answer fails without a judge call.
+
+**Secondary: WebJudge, reported per task.** We also ran the benchmark's own **WebJudge** pipeline (key-point extraction → per-screenshot relevance scoring → final verdict) at upstream commit `f0d805ee0e9e0b3ea70911e45e5264b72968f3dc`, prompts and thresholds unchanged.
+
+- It grades the process as well as the result. A correct answer fails if the site's filter or sort was not applied through the page itself.
+- Backbone model: `gemini-3.1-pro-preview`; the official leaderboard uses `o4-mini`.
+- Evidence: each REPL call is exported as an action with its source code and returned text, alongside its screenshot. Up to 50 relevant screenshots are kept, spread across the run and always including the first and last relevant ones (`dassi-webjudge-evidence-v1`).
+- Its verdict is the `webjudge` column of `om2w/tasks.csv` and `webjudge_success` in `om2w/results.json`.
+
+Aside and Browser Use also grade Online-Mind2Web on the result with their own LLM judges, so the headline is closer to how their numbers were produced. The official leaderboard ranks by WebJudge.
 
 ## Reading the per-task files
 
