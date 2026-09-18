@@ -1,0 +1,17 @@
+{
+  "taskId": "c2153fc053112e89c2f103869c4d6890",
+  "startedAt": "2026-09-17T23:09:19.221+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "A top-rated house cleaning service in zip code 10001 offering weekly recurring cleanings is **Irina Home Cleaning NYC LLC**.\n\n### Service Details:\n- **Business Name:** Irina Home Cleaning NYC LLC\n- **Rating & Reviews:** 5.0 out of 5 stars (119 reviews)\n- **Status:** Top Pro, Background Checked\n- **Experience:** 294 hires on Thumbtack, 154 similar jobs completed near 10001, 5 years in business\n- **Service Area:** Manhattan (including 10001), Brooklyn, Queens, and Staten Island\n- **Frequency Options:** Recurring cleaning available weekly, every 2 weeks, or every 4 weeks (as well as one-time cleans)\n- **Services Offered:** Standard maintenance cleaning, deep cleaning, move-in/move-out cleaning, interior window cleaning, fridge cleaning, oven cleaning, laundry and folding, pet-friendly cleaning\n- **Accepted Payment Methods:** Credit card, PayPal, Stripe, Venmo, Zelle",
+  "agentFinalAnswer": "A top-rated house cleaning service in zip code 10001 offering weekly recurring cleanings is **Irina Home Cleaning NYC LLC**.\n\n### Service Details:\n- **Business Name:** Irina Home Cleaning NYC LLC\n- **Rating & Reviews:** 5.0 out of 5 stars (119 reviews)\n- **Status:** Top Pro, Background Checked\n- **Experience:** 294 hires on Thumbtack, 154 similar jobs completed near 10001, 5 years in business\n- **Service Area:** Manhattan (including 10001), Brooklyn, Queens, and Staten Island\n- **Frequency Options:** Recurring cleaning available weekly, every 2 weeks, or every 4 weeks (as well as one-time cleans)\n- **Services Offered:** Standard maintenance cleaning, deep cleaning, move-in/move-out cleaning, interior window cleaning, fridge cleaning, oven cleaning, laundry and folding, pet-friendly cleaning\n- **Accepted Payment Methods:** Credit card, PayPal, Stripe, Venmo, Zelle",
+  "actionCount": 26,
+  "durationMs": 102217,
+  "screenshotCount": 103,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "Based on the instructions and the provided response, the task required finding a house cleaning service in zip code 10001 on a weekly basis. The result response successfully identifies a top-rated service (Irina Home Cleaning NYC LLC) that operates in zip code 10001, has high ratings, and explicitly offers weekly recurring cleanings among its frequency options. The response fully and accurately satisfies the web task instruction.\n\nSUCCESS",
+  "llmCalls": 26,
+  "toolCalls": 25,
+  "costUsd": 0.16895902499999998
+}

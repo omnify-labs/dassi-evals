@@ -1,0 +1,17 @@
+{
+  "taskId": "0e5536aaad9d3462b06cf725e6ed535a",
+  "startedAt": "2026-09-17T23:56:13.913+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "The page displaying the average wait times for U.S. citizens arriving at Raleigh-Durham International Airport (RDU) on 2025-03-12 has been loaded (URL: https://awt.cbp.gov/Report).\n\nSummary of wait times for U.S. Citizens at Terminal 2 on 2025-03-12:\n\n- 1300 – 1400: Average Wait Time: 6 minutes (Max: 15 min) | Flights: 2\n- 1400 – 1500: Average Wait Time: 9 minutes (Max: 30 min) | Flights: 1\n- 1600 – 1700: Average Wait Time: 23 minutes (Max: 47 min) | Flights: 1\n- 1700 – 1800: Average Wait Time: 44 minutes (Max: 92 min) | Flights: 1\n- 1900 – 2000: Average Wait Time: 21 minutes (Max: 42 min) | Flights: 2",
+  "agentFinalAnswer": "The page displaying the average wait times for U.S. citizens arriving at Raleigh-Durham International Airport (RDU) on 2025-03-12 has been loaded (URL: https://awt.cbp.gov/Report).\n\nSummary of wait times for U.S. Citizens at Terminal 2 on 2025-03-12:\n\n- 1300 – 1400: Average Wait Time: 6 minutes (Max: 15 min) | Flights: 2\n- 1400 – 1500: Average Wait Time: 9 minutes (Max: 30 min) | Flights: 1\n- 1600 – 1700: Average Wait Time: 23 minutes (Max: 47 min) | Flights: 1\n- 1700 – 1800: Average Wait Time: 44 minutes (Max: 92 min) | Flights: 1\n- 1900 – 2000: Average Wait Time: 21 minutes (Max: 42 min) | Flights: 2",
+  "actionCount": 47,
+  "durationMs": 135448,
+  "screenshotCount": 135,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "Based on the web task instruction, the user requested to show the page with average wait times for U.S. citizens arriving at Raleigh-Durham International Airport on 2025-03-12. \n\nLooking at the provided screenshot, the page displays the CBP Airport Wait Times results for Raleigh-Durham International Airport (RDU) on 2025-03-12. The table clearly lists the hourly breakdown, showing the U.S. Citizen average and max wait times alongside flight counts, which matches the summary provided in the result response. The action and response are fully supported by the visual evidence.\n\nSUCCESS",
+  "llmCalls": 47,
+  "toolCalls": 46,
+  "costUsd": 0.35607772500000007
+}

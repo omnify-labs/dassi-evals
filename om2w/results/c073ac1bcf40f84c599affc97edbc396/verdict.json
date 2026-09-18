@@ -1,0 +1,17 @@
+{
+  "taskId": "c073ac1bcf40f84c599affc97edbc396",
+  "startedAt": "2026-09-17T23:04:32.507+00:00",
+  "status": "error",
+  "nativeStopReason": "aborted",
+  "error": "Stream idle timeout after 90002ms",
+  "answer": "",
+  "agentFinalAnswer": "",
+  "actionCount": 0,
+  "durationMs": 275439,
+  "screenshotCount": 275,
+  "judgedOfficial": "failure",
+  "judged": "failure",
+  "llmCalls": 3,
+  "toolCalls": 0,
+  "costUsd": 0
+}

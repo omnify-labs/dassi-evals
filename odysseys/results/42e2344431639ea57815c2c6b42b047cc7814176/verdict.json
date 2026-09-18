@@ -1,0 +1,22 @@
+{
+  "taskId": "42e2344431639ea57815c2c6b42b047cc7814176",
+  "startedAt": "2026-09-18T03:02:01.114+00:00",
+  "status": "error",
+  "nativeStopReason": "error",
+  "error": "{\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"The service is currently unavailable.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"\"}}",
+  "answer": "",
+  "agentFinalAnswer": "",
+  "actionCount": 54,
+  "durationMs": 354290,
+  "screenshotCount": 353,
+  "rubricScore": {
+    "passed": 2,
+    "total": 6,
+    "score": 0.3333333333333333
+  },
+  "judged": "failure",
+  "judgeReasoning": "R1: failure, R2: success, R3: failure, R4: failure, R5: success, R6: failure",
+  "llmCalls": 58,
+  "toolCalls": 54,
+  "costUsd": 0.5233223250000001
+}

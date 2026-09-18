@@ -1,0 +1,21 @@
+{
+  "taskId": "24705fdf2d165f4f844984e62b4511396a88206d",
+  "startedAt": "2026-09-18T04:34:37.187+00:00",
+  "status": "timeout",
+  "answer": "",
+  "agentFinalAnswer": "",
+  "durationMs": 317004,
+  "screenshotCount": 308,
+  "error": "Session export timed out",
+  "blocked": "captcha",
+  "rubricScore": {
+    "passed": 0,
+    "total": 6,
+    "score": 0
+  },
+  "judged": "failure",
+  "judgeReasoning": "R1: failure, R2: failure, R3: failure, R4: failure, R5: failure, R6: failure",
+  "llmCalls": 43,
+  "toolCalls": 43,
+  "costUsd": 0.520997325
+}

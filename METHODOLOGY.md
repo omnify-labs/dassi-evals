@@ -15,12 +15,11 @@ Everything needed to interpret the numbers in this repository, including the pla
 
 If Chrome itself crashes, the harness restarts the browser and runs that task again from the start; the agent never sees the earlier attempt. A task the agent started and did not finish is recorded with `status: error` or `timeout` and scored as a failure.
 
-Two infrastructure failures are handled by re-running, under rules that do not depend on how any task scored:
+Infrastructure failures are handled by these rules. None of them depends on how any task scored.
 
 - **A shard killed by the runner** (out of memory, exit 137) is discarded in full and its tasks run again in fresh shards. None of the killed shard's results are used.
 - **A shard whose tasks all ran but whose grading failed** keeps its agent attempts; only the grading is redone. Agent attempts are never repeated to fix a grading failure.
 - **A task the agent never started** — the harness recorded an error in under 5 seconds with no answer, for example because Chrome failed to restart — is run again in a later shard, and that attempt is scored. A task the agent started is never re-run, whatever its outcome.
-
 - **A task the harness could not read back.** The agent ran, but the harness timed out reading the finished session out of the extension (`Session export timed out`), so there is no answer to grade. The task is run once more and that attempt is scored, even if it also comes back empty. The export exists only for benchmarking; users never see it.
 
 Every re-run is listed in `results.json` (`rerun_no_result`, with the reason) so it can be checked.
@@ -63,7 +62,8 @@ Grading is automated. We use our own judge configuration, described here in full
 - One judge call per rubric item. The judge sees that rubric's requirement and verification text, the agent's final answer, the action history, and the 8 most recent screenshots.
 - **Perfect** (headline): a task counts only if every one of its rubric items passes. **Rubric average**: mean of per-task pass fractions.
 - 53 tasks (CI runs 35279908345, 35279913818 and 35303493831) finished every task, but the CI job ended during grading after one Gemini API error (`503`). Those agent attempts are kept and graded outside CI with the same judge code, retrying provider errors. By then the upload step had removed the periodic screenshots, so the judge saw the last 8 per-action screenshots instead.
-- Differences from the reference scorer (`run_full_trajectory_per_rubric.py`): the reference shows the judge every step's screenshot and passes a rubric if any step satisfies it; ours shows the final 8 screenshots plus the full action history. The reference runs agents with a 100-step budget (some leaderboard entries disclose 200); ours has a time limit and no step cap. Tool-call counts per task are in `odysseys/tasks.csv`.
+- Differences from the reference scorer (`run_full_trajectory_per_rubric.py`): the reference shows the judge every step's screenshot and passes a rubric if any step satisfies it; ours shows the final 8 screenshots plus the full action history. The reference runs agents with a 100-step budget (some leaderboard entries disclose 200); ours has a time limit and no step cap.
+- **Step budgets.** To compare with capped runs, `odysseys/results.json` counts the tasks that were perfect within 100 and 200 model calls (`success_within_llm_calls`). A model call is not the same unit as a step for a screenshot-and-click agent: one Dassi model call can run a code block that performs several browser actions. Per-task model-call and tool-call counts are in `odysseys/tasks.csv`.
 
 ### Online-Mind2Web
 
@@ -83,6 +83,17 @@ Grading is automated. We use our own judge configuration, described here in full
 
 Aside and Browser Use also grade Online-Mind2Web on the result with their own LLM judges, so the headline is closer to how their numbers were produced. The official leaderboard ranks by WebJudge.
 
+**Where the two judges disagree.** An answer judge can credit an answer the agent never actually read from the page, so we checked every disagreement against WebJudge's written reasoning.
+
+| | WebJudge pass | WebJudge fail |
+|---|---|---|
+| Answer judge pass | 266 | 23 |
+| Answer judge fail | 8 | 2 (+1 with no WebJudge verdict) |
+
+- In 18 of the 23, WebJudge objects only to how the result was reached: a filter or sort applied in code rather than by clicking it.
+- In 5, WebJudge says the result itself falls short, and we count them as contested: `9d090a15…`, `9af05e39…`, `5dec0e66…`, `c6c9dc60…`, `a48e2f1e…`. Without them the headline would be 284/300.
+- In none of them does WebJudge say the answer was made up rather than read from the page.
+
 ## Reading the per-task files
 
 Each `<benchmark>/results/<task_id>/` folder holds:
@@ -91,7 +102,9 @@ Each `<benchmark>/results/<task_id>/` folder holds:
 - `session.json` — the full agent session: every model turn, tool call, tool output, and per-call token usage and cost.
 - `verdict.json` — run status, duration, judge verdict and reasoning, rubric counts, model-call and tool-call totals, cost.
 
-`session.json` contains web page content exactly as the agent read it, which can include addresses, phone numbers or keys that those sites publish. The extension's internal service-worker logs are not included. Screenshots are attached to the repository's release as one archive per shard.
+Dassi appends its own context to each task prompt: a note on the open tabs, its memory instructions and a page thumbnail. In `session.json` that block is replaced with `<!-- dassi:system-context omitted -->`. The task text and everything the agent did and read are unchanged.
+
+`session.json` contains web page content exactly as the agent read it, which can include addresses and phone numbers that those sites publish. Credentials that sites exposed in their pages or network traffic (Google API keys, JWT session tokens, bearer tokens) are replaced with `[REDACTED]`. The extension's internal service-worker logs and the run screenshots are not included.
 
 ## Reproducing the aggregation
 

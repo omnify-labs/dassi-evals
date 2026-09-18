@@ -1,0 +1,196 @@
+{
+  "dataset": "om2w",
+  "metric": "success = answer-correctness judge (is the final result right?); webjudge_success = trajectory WebJudge, secondary",
+  "model": "gemini-3.8-flash",
+  "judgeModel": "gemini-3.5-flash-lite",
+  "judgeProvider": "google",
+  "officialJudgeVersion": "dassi-webjudge-evidence-v1:gemini:gemini-3.1-pro-preview",
+  "shards": [
+    {
+      "runState": "35279677300/results/2026-09-17T22-01-08/run-state.json",
+      "tasks": 47,
+      "startedAt": "2026-09-17T22:01:08.278Z"
+    },
+    {
+      "runState": "35279679576/results/2026-09-17T22-01-09/run-state.json",
+      "tasks": 49,
+      "startedAt": "2026-09-17T22:01:09.953Z"
+    },
+    {
+      "runState": "35279681509/results/2026-09-17T22-01-11/run-state.json",
+      "tasks": 46,
+      "startedAt": "2026-09-17T22:01:11.881Z"
+    },
+    {
+      "runState": "35279684084/results/2026-09-17T22-01-28/run-state.json",
+      "tasks": 47,
+      "startedAt": "2026-09-17T22:01:28.879Z"
+    },
+    {
+      "runState": "35279686221/results/2026-09-17T22-01-17/run-state.json",
+      "tasks": 46,
+      "startedAt": "2026-09-17T22:01:17.735Z"
+    },
+    {
+      "runState": "35279688602/results/2026-09-17T22-01-17/run-state.json",
+      "tasks": 48,
+      "startedAt": "2026-09-17T22:01:17.441Z"
+    },
+    {
+      "runState": "35281147341/results/2026-09-17T23-46-14/run-state.json",
+      "tasks": 17,
+      "startedAt": "2026-09-17T23:46:14.229Z"
+    },
+    {
+      "runState": "35303635507/results/2026-09-18T03-48-37/run-state.json",
+      "tasks": 3,
+      "startedAt": "2026-09-18T03:48:37.043Z"
+    },
+    {
+      "runState": "35304108097/results/2026-09-18T04-19-03/run-state.json",
+      "tasks": 11,
+      "startedAt": "2026-09-18T04:19:03.592Z"
+    }
+  ],
+  "overall": {
+    "tasks": 300,
+    "success": 289,
+    "success_rate": 0.9633333333333334,
+    "webjudge_success": 274
+  },
+  "by_level": {
+    "easy": {
+      "tasks": 80,
+      "success": 78,
+      "success_rate": 0.975,
+      "webjudge_success": 79
+    },
+    "hard": {
+      "tasks": 79,
+      "success": 76,
+      "success_rate": 0.9620253164556962,
+      "webjudge_success": 67
+    },
+    "medium": {
+      "tasks": 141,
+      "success": 135,
+      "success_rate": 0.9574468085106383,
+      "webjudge_success": 128
+    }
+  },
+  "status": {
+    "completed": 297,
+    "error": 2,
+    "timeout": 1
+  },
+  "not_reported_by_any_shard": [],
+  "rerun_no_result": [
+    {
+      "task_id": "db1ffb5e60578597d1c3aa3c389ac7b1",
+      "reason": "never started"
+    },
+    {
+      "task_id": "e24662008c3be5d56f986f232fcec447",
+      "reason": "never started"
+    },
+    {
+      "task_id": "1fc28d91d25ccd1c6ba268101326a654",
+      "reason": "never started"
+    },
+    {
+      "task_id": "ade4c09ad3fdb1607209750924cd232f",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "816851ff92ff0219acf4364dcc2c4692_110325",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "3c1ffc3f494e423b3c434c79e35da8f3_110325",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "a0a18ca6a3529f3e97c771aadd42d3a0_110325",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "50d91eabde542906937ab4c5b6f8f23a_121425",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "64b76158720a69e4a5c31a55d54928bf",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "29b7372d5a3884a2ba831af2d117af3c",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "a6f0434ce6aff5f9b03681241b03ad82",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "47bfe8a7e0e4e7efc837287b407fbe90",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "96afb3c51146b0c2a9c55f039a5ea6d6",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "636b07af4dd97c1793733db1fd1b90b8_110325",
+      "reason": "session export failed"
+    }
+  ],
+  "no_result_not_rerun": [
+    "816851ff92ff0219acf4364dcc2c4692_110325"
+  ],
+  "judge_unknown": 0,
+  "bot_wall_seen": 22,
+  "per_task": {
+    "duration_s": {
+      "mean": 172.81,
+      "median": 134
+    },
+    "llm_calls": {
+      "mean": 37.016666666666666,
+      "median": 32
+    },
+    "tool_calls": {
+      "mean": 35.99,
+      "median": 31
+    },
+    "cost_usd": {
+      "mean": 0.46595033333333336,
+      "median": 0.31975,
+      "total": 139.7851
+    }
+  },
+  "success_within_llm_calls": {
+    "100": 283,
+    "200": 289
+  },
+  "input_tokens_per_llm_call": 82576,
+  "tool_mix": {
+    "repl": {
+      "calls": 10648,
+      "share": 0.9861998703343521
+    },
+    "browser_screenshot": {
+      "calls": 53,
+      "share": 0.004908770954894878
+    },
+    "read": {
+      "calls": 51,
+      "share": 0.004723534315087524
+    },
+    "edit": {
+      "calls": 44,
+      "share": 0.004075206075761785
+    },
+    "browser_read": {
+      "calls": 1,
+      "share": 0.00009261831990367695
+    }
+  }
+}

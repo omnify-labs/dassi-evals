@@ -1,0 +1,17 @@
+{
+  "taskId": "9ef1a8972f375db59c0e6329e11b7939",
+  "startedAt": "2026-09-17T22:33:41.063+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "The Farms land listing in Wilkes County, NC with the lowest price on LandWatch is:\n\n- **Price**: $38,888\n- **Size**: 6.5 Acres\n- **Address**: 149 Chestnut Street, North Wilkesboro, NC 28659 (Wilkes County)\n- **Property Type**: Farms and Ranches\n- **URL**: https://www.landwatch.com/wilkes-county-north-carolina-farms-and-ranches-for-sale/pid/426366305",
+  "agentFinalAnswer": "The Farms land listing in Wilkes County, NC with the lowest price on LandWatch is:\n\n- **Price**: $38,888\n- **Size**: 6.5 Acres\n- **Address**: 149 Chestnut Street, North Wilkesboro, NC 28659 (Wilkes County)\n- **Property Type**: Farms and Ranches\n- **URL**: https://www.landwatch.com/wilkes-county-north-carolina-farms-and-ranches-for-sale/pid/426366305",
+  "actionCount": 24,
+  "durationMs": 113538,
+  "screenshotCount": 113,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "Based on the provided instructions and the result response, the agent successfully found farms land in Wilkes County, NC with the lowest price. The response provides specific details including the price ($38,888), size (6.5 Acres), address (149 Chestnut Street, North Wilkesboro, NC 28659), property type, and the corresponding listing URL. The attached screenshots corroborate that the agent visited a LandWatch listing matching these properties.\n\nSUCCESS",
+  "llmCalls": 24,
+  "toolCalls": 23,
+  "costUsd": 0.17316487500000002
+}

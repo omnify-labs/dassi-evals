@@ -1,0 +1,17 @@
+{
+  "taskId": "d1807551297ac60ecaaabbd2a2ed301a_110325",
+  "startedAt": "2026-09-18T00:01:06.037+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "**Liz Porter** is a Dallas-based divorce attorney who has been included in the **Top 50: Women Texas Super Lawyers** list.\n\n### Details from Super Lawyers:\n- **Attorney:** Liz Porter\n- **Firm:** KoonsFuller P.C. Family Law\n- **Location:** 1717 McKinney Ave, Suite 1500, Dallas, TX 75201\n- **Practice Area:** Divorce & Family Law (Board Certified in Family Law by the Texas Board of Legal Specialization)\n- **Top 50 Women Texas Super Lawyers Inclusion:** Included on the list for multiple years, including 2021 through 2026",
+  "agentFinalAnswer": "**Liz Porter** is a Dallas-based divorce attorney who has been included in the **Top 50: Women Texas Super Lawyers** list.\n\n### Details from Super Lawyers:\n- **Attorney:** Liz Porter\n- **Firm:** KoonsFuller P.C. Family Law\n- **Location:** 1717 McKinney Ave, Suite 1500, Dallas, TX 75201\n- **Practice Area:** Divorce & Family Law (Board Certified in Family Law by the Texas Board of Legal Specialization)\n- **Top 50 Women Texas Super Lawyers Inclusion:** Included on the list for multiple years, including 2021 through 2026",
+  "actionCount": 15,
+  "durationMs": 50292,
+  "screenshotCount": 50,
+  "judgedOfficial": "success",
+  "judged": "failure",
+  "judgeReasoning": "To evaluate whether the task has been successfully completed, let's review the instructions and the provided output:\n\n1. **Web Task Instruction:** Show me a Dallas-based divorce lawyer who was once included in Top 50 Women Texas Super Lawyers list.\n2. **Result Response:** Identifies **Liz Porter**, a Dallas-based family/divorce attorney at KoonsFuller P.C., and notes her details along with her inclusion in the Super Lawyers list.\n\nWhile the result response correctly identifies a Dallas-based family lawyer, the specific prompt requirement asked for someone included in the **\"Top 50 Women Texas Super Lawyers\"** list. The screenshots and text response show her general selection to Super Lawyers (2012, 2014-2026), but do not substantiate or mention her inclusion specifically in the *Top 50 Women Texas Super Lawyers* list. \n\nTherefore, the response fails to fully satisfy the specific criteria requested in the instruction.\n\n**SUCCESS** or **NOT SUCCESS**: NOT SUCCESS",
+  "llmCalls": 15,
+  "toolCalls": 14,
+  "costUsd": 0.14122507500000003
+}

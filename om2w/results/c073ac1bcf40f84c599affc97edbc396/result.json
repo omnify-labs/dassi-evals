@@ -1,0 +1,9 @@
+{
+  "schema_version": "online-mind2web-v2",
+  "dassi_evidence_version": "dassi-webjudge-evidence-v1",
+  "task_id": "c073ac1bcf40f84c599affc97edbc396",
+  "task": "Search for the cheapest apartment in Detroit for a student.",
+  "reference_length": 9,
+  "agent_final_answer": "",
+  "action_history": []
+}

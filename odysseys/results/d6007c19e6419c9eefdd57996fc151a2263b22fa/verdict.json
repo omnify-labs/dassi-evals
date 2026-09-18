@@ -1,0 +1,15 @@
+{
+  "taskId": "d6007c19e6419c9eefdd57996fc151a2263b22fa",
+  "status": "error",
+  "answer": "",
+  "durationMs": 0,
+  "screenshotCount": 0,
+  "error": "Chrome restart failed",
+  "rubricScore": {
+    "passed": 0,
+    "total": 7,
+    "score": 0
+  },
+  "judged": "failure",
+  "judgeReasoning": "R1: failure, R2: failure, R3: failure, R4: failure, R5: failure, R6: failure, R7: failure"
+}

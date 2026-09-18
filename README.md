@@ -11,28 +11,31 @@ Dassi is a Chrome extension. It was run as shipped (release 0.74.1) on its defau
 
 ## Results
 
-<!-- RESULTS: filled from odysseys/results.json and om2w/results.json once all shards finish -->
-
 ### Odysseys — 200 tasks
 
 | Metric | Dassi (`gemini-3.8-flash`) |
 |---|---|
-| Perfect (every rubric passed) | **TBD / 200** |
-| Rubric average | TBD |
-| Rubric items passed | TBD / 1,225 |
-| Easy / Medium / Hard (Perfect) | TBD / TBD / TBD |
-| Median tool calls per task | TBD |
-| Median cost per task | TBD |
+| Perfect (every rubric passed) | **183 / 200 (91.5%)** |
+| Rubric average | 95.0% |
+| Rubric items passed | 1,159 / 1,225 (94.6%) |
+| Easy / Medium / Hard (Perfect) | 43/45 (95.6%) · 39/46 (84.8%) · 101/109 (92.7%) |
+| Perfect within 100 / 200 model calls | 157 (78.5%) · 182 (91.0%) |
+| Median tool calls per task | 60 (97.2% of all calls are code in the REPL) |
+| Median time per task | 6 min 2 s |
+| Median model cost per task | $0.66 |
+
+Published Odysseys runs cap the agent at 100 or 200 steps; Dassi ran uncapped. The "within" row counts tasks that were perfect within that many model calls. A Dassi model call can run code that performs several browser actions, so it is not the same unit as one step of a screenshot-and-click agent.
 
 ### Online-Mind2Web — 300 tasks
 
 | Metric | Dassi (`gemini-3.8-flash`) |
 |---|---|
-| Correct result (answer judge) | **TBD / 300** |
-| Easy / Medium / Hard | TBD / TBD / TBD |
-| WebJudge, which also grades the process | TBD / 300 |
-| Median tool calls per task | TBD |
-| Median cost per task | TBD |
+| Correct result (answer judge) | **289 / 300 (96.3%)** |
+| Easy / Medium / Hard | 78/80 (97.5%) · 135/141 (95.7%) · 76/79 (96.2%) |
+| WebJudge, which also grades the process | 274 / 300 (91.3%) |
+| Median tool calls per task | 31 (98.6% of all calls are code in the REPL) |
+| Median time per task | 2 min 14 s |
+| Median model cost per task | $0.32 |
 
 Summary numbers: [`odysseys/results.json`](odysseys/results.json), [`om2w/results.json`](om2w/results.json). One row per task: [`odysseys/tasks.csv`](odysseys/tasks.csv), [`om2w/tasks.csv`](om2w/tasks.csv). Failed, timed-out and crashed tasks are all included and count as failures.
 
@@ -75,7 +78,14 @@ scripts/aggregate.mjs   merges the CI shards into the files above
 METHODOLOGY.md          agent setup, environment, prompts, grading, known differences
 ```
 
-Screenshots for every task are attached to the [latest release](../../releases) as one archive per shard.
+Screenshots are not included in this repository yet.
+
+## Data and licenses
+
+Each task's text is reproduced in its `result.json`. Rubrics are not; they are in the Odysseys dataset.
+
+- Online-Mind2Web tasks: © OSU NLP Group, [CC BY 4.0](https://huggingface.co/datasets/osunlp/Online-Mind2Web), revision `6aa56e07`.
+- Odysseys tasks: © the Odysseys authors, [MIT](https://github.com/ljang0/Odysseys/blob/main/LICENSE), revision `95307c76`.
 
 ## Questions and corrections
 

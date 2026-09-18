@@ -16,7 +16,7 @@
  * verdict.json (status and the judge's decision). Screenshots and the
  * extension's internal service-worker logs are not copied.
  */
-import { readFileSync, writeFileSync, readdirSync, existsSync, statSync, mkdirSync, copyFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, statSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { parseArgs } from 'node:util';
 
@@ -202,6 +202,10 @@ const summary = {
     tool_calls: { mean: mean(nums(perTask, 'tool_calls')), median: median(nums(perTask, 'tool_calls')) },
     cost_usd: { mean: mean(nums(perTask, 'cost_usd')), median: median(nums(perTask, 'cost_usd')), total: nums(perTask, 'cost_usd').reduce((a, b) => a + b, 0) },
   },
+  // Published Odysseys runs cap the agent at 100 (or 200) steps; Dassi runs uncapped.
+  success_within_llm_calls: Object.fromEntries(
+    [100, 200].map((cap) => [cap, perTask.filter((t) => t.success && Number(t.llm_calls) <= cap).length]),
+  ),
   input_tokens_per_llm_call: (() => {
     const withUsage = [...rows.values()].filter((r) => r.llmCalls > 0);
     const calls = withUsage.reduce((a, r) => a + r.llmCalls, 0);
@@ -224,14 +228,32 @@ writeFileSync(
   [columns.join(','), ...perTask.map((t) => columns.map((c) => csvCell(t[c])).join(','))].join('\n') + '\n',
 );
 
+/** Credentials that websites exposed in page content or network traffic the agent read. */
+const SECRETS = [
+  /AIza[0-9A-Za-z_-]{35}/g,
+  /eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{10,}/g,
+  /(?<=[Bb]earer )[A-Za-z0-9._~+/-]{20,}=*/g,
+];
+/**
+ * Dassi appends its own context (browser state, memory instructions, a page
+ * thumbnail) to the user message after this marker. It runs to the end of the
+ * JSON string it sits in, so the match stops at the first unescaped quote.
+ */
+const INJECTED_CONTEXT = /<!-- dassi:system-context -->(?:[^"\\]|\\.)*/g;
+const redact = (text) =>
+  SECRETS.reduce((t, re) => t.replace(re, '[REDACTED]'), text).replace(
+    INJECTED_CONTEXT,
+    '<!-- dassi:system-context omitted -->',
+  );
+
 for (const [taskId, row] of rows) {
   const dest = join(args.out, 'results', taskId);
   mkdirSync(dest, { recursive: true });
   for (const [from, to] of [['result.json', 'result.json'], ['session-evidence.json', 'session.json']]) {
-    if (existsSync(join(row.taskDir, from))) copyFileSync(join(row.taskDir, from), join(dest, to));
+    if (existsSync(join(row.taskDir, from))) writeFileSync(join(dest, to), redact(readFileSync(join(row.taskDir, from), 'utf8')));
   }
   const { taskDir, costUsd, llmCalls, toolCalls, toolNames, inputTokens, sessionId, operation, ...verdict } = row;
-  writeFileSync(join(dest, 'verdict.json'), JSON.stringify({ ...verdict, llmCalls, toolCalls, costUsd }, null, 2) + '\n');
+  writeFileSync(join(dest, 'verdict.json'), redact(JSON.stringify({ ...verdict, llmCalls, toolCalls, costUsd }, null, 2)) + '\n');
 }
 
 const pct = (x) => (x * 100).toFixed(1) + '%';

@@ -1,0 +1,17 @@
+{
+  "taskId": "9b5dfe54a1c14c5c6336bae7374c3bb5",
+  "startedAt": "2026-09-17T23:33:19.675+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "Here is a UPS Access Point located near Spring, TX, along with the services provided:\n\n### **UPS Access Point™ in Michaels Store # 2760**\n* **ID:** U78642945\n* **Address:** 20626 Interstate 45, Spring, TX 77373\n* **Distance:** ~1.1 miles from central Spring, TX\n\n#### **Available Services:**\n* Find a drop off location\n* Staffed Locations\n* Ground Shipping\n* Air Shipping\n* Accepts Restricted Articles\n* Accepts Mobile Barcodes\n\n#### **Operating Hours:**\n* Monday – Saturday: 9:00 AM – 9:00 PM\n* Sunday: 10:00 AM – 7:00 PM\n\n#### **Drop-Off Deadlines:**\n* **Monday – Friday:** 3:30 PM (Ground & Air)\n* **Saturday:** 2:00 PM (Ground) / 1:00 PM (Air)\n* **Sunday:** Closed for drop-offs\n\n---\n\n### **Alternative nearby location:**\n**UPS Access Point™ in CVS Store # 5977**\n* **ID:** U87370356\n* **Address:** 24802 Aldine Westfield Rd, Spring, TX 77373 (~1.3 miles away)\n* **Hours:** Monday – Sunday: 7:00 AM – 11:55 PM\n* **Services Provided:**\n  * Find a drop off location\n  * Staffed Locations\n  * Ground Shipping\n  * Air Shipping",
+  "agentFinalAnswer": "Here is a UPS Access Point located near Spring, TX, along with the services provided:\n\n### **UPS Access Point™ in Michaels Store # 2760**\n* **ID:** U78642945\n* **Address:** 20626 Interstate 45, Spring, TX 77373\n* **Distance:** ~1.1 miles from central Spring, TX\n\n#### **Available Services:**\n* Find a drop off location\n* Staffed Locations\n* Ground Shipping\n* Air Shipping\n* Accepts Restricted Articles\n* Accepts Mobile Barcodes\n\n#### **Operating Hours:**\n* Monday – Saturday: 9:00 AM – 9:00 PM\n* Sunday: 10:00 AM – 7:00 PM\n\n#### **Drop-Off Deadlines:**\n* **Monday – Friday:** 3:30 PM (Ground & Air)\n* **Saturday:** 2:00 PM (Ground) / 1:00 PM (Air)\n* **Sunday:** Closed for drop-offs\n\n---\n\n### **Alternative nearby location:**\n**UPS Access Point™ in CVS Store # 5977**\n* **ID:** U87370356\n* **Address:** 24802 Aldine Westfield Rd, Spring, TX 77373 (~1.3 miles away)\n* **Hours:** Monday – Sunday: 7:00 AM – 11:55 PM\n* **Services Provided:**\n  * Find a drop off location\n  * Staffed Locations\n  * Ground Shipping\n  * Air Shipping",
+  "actionCount": 79,
+  "durationMs": 237764,
+  "screenshotCount": 238,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "To evaluate the task, we look at the web task instruction: \"Find a UPS Access Point near SPRING, TX and services provided by them.\"\n\nThe Result Response provides specific UPS Access Point locations near Spring, TX (such as Michaels and CVS), their addresses, operating hours, and services provided (such as drop-off, ground shipping, air shipping, etc.). The screenshots confirm that the agent interacted with the UPS Access Point finder for Spring, TX (showing CVS Store # 5977 with address matching Spring, TX 77373). \n\nThe response is complete, well-formatted, directly answers the prompt, and does not contradict the provided screenshots.\n\nSUCCESS",
+  "llmCalls": 79,
+  "toolCalls": 78,
+  "costUsd": 0.8292738000000002
+}

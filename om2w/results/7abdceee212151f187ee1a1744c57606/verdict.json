@@ -1,0 +1,17 @@
+{
+  "taskId": "7abdceee212151f187ee1a1744c57606",
+  "startedAt": "2026-09-17T23:51:44.717+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "The page displaying the filing fee schedule for Form I-140 is USCIS's **Form G-1055, Fee Schedule** page:\n**URL:** https://www.uscis.gov/g-1055\n\n### Filing Fee Breakdown for a Self-Petitioned Form I-140\n\n1. **Base Filing Fee (General Filing):**\n   - **Paper filing:** $715\n   - **Online filing:** $665\n\n2. **Additional Fees (Asylum Program Fee):**\n   - **Self-petitioner / Small Employer:** $300 (applies to both paper and online filings)\n   *(Regular petitioners pay $600; nonprofits pay $0)*\n\n### Total Fee for a Self-Petitioned I-140:\n- **Paper filing:** $1,015 ($715 base + $300 Asylum Program Fee)\n- **Online filing:** $965 ($665 base + $300 Asylum Program Fee)\n\nThe browser tab has been navigated to this fee schedule with Form I-140 selected and the fee table displayed.",
+  "agentFinalAnswer": "The page displaying the filing fee schedule for Form I-140 is USCIS's **Form G-1055, Fee Schedule** page:\n**URL:** https://www.uscis.gov/g-1055\n\n### Filing Fee Breakdown for a Self-Petitioned Form I-140\n\n1. **Base Filing Fee (General Filing):**\n   - **Paper filing:** $715\n   - **Online filing:** $665\n\n2. **Additional Fees (Asylum Program Fee):**\n   - **Self-petitioner / Small Employer:** $300 (applies to both paper and online filings)\n   *(Regular petitioners pay $600; nonprofits pay $0)*\n\n### Total Fee for a Self-Petitioned I-140:\n- **Paper filing:** $1,015 ($715 base + $300 Asylum Program Fee)\n- **Online filing:** $965 ($665 base + $300 Asylum Program Fee)\n\nThe browser tab has been navigated to this fee schedule with Form I-140 selected and the fee table displayed.",
+  "actionCount": 34,
+  "durationMs": 116121,
+  "screenshotCount": 116,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "To evaluate the task, we need to check if the agent successfully found and presented the filing fee page and details for a self-petitioned I-140 application.\n\n1. **Web Task Instruction:** \"Can you show me the page with the filing fee for a self-petitioned I-140 application?\"\n2. **Result Response:** Provides the correct link (USCIS Form G-1055 fee schedule) and breaks down the exact fees for a self-petitioned Form I-140 (Base fee + Asylum Program Fee for small employers/self-petitioners: $300, leading to $1,015 for paper or $965 for online filing).\n3. **Screenshots:** Show the USCIS fee schedule page for Form I-140, displaying the General Filing fees and Asylum Program Fee breakdown (where item 'c' corresponds to filing as a Small Employer or self-petitioner with the correct corresponding fees).\n\nThe response directly and completely answers the user's request with accurate information matching the official source shown in the screenshots.\n\n**SUCCESS**",
+  "llmCalls": 34,
+  "toolCalls": 33,
+  "costUsd": 0.47128942499999993
+}

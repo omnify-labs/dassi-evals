@@ -1,0 +1,17 @@
+{
+  "taskId": "d02d236836924919f35f2438d9ed2374",
+  "startedAt": "2026-09-17T23:55:28.981+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "Psycho (1960)",
+  "agentFinalAnswer": "Psycho (1960)",
+  "actionCount": 112,
+  "durationMs": 626438,
+  "screenshotCount": 626,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "Based on the instructions and the provided screenshots, the task required browsing the IMDb top 250 movies and finding one that is available on AMC+. \n\nThe result response provides \"Psycho (1960)\". The attached screenshots show the IMDb page for *Psycho* (1960), which clearly displays the AMC+ streaming option under the streaming section on the page. Furthermore, *Psycho* is part of the IMDb Top 250 movies. Therefore, the result fully satisfies the instruction.\n\n**SUCCESS**",
+  "llmCalls": 112,
+  "toolCalls": 111,
+  "costUsd": 1.5260196750000004
+}

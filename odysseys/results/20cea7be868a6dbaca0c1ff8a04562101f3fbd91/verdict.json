@@ -1,0 +1,20 @@
+{
+  "taskId": "20cea7be868a6dbaca0c1ff8a04562101f3fbd91",
+  "startedAt": "2026-09-18T05:47:03.242+00:00",
+  "status": "timeout",
+  "answer": "",
+  "agentFinalAnswer": "",
+  "durationMs": 219358,
+  "screenshotCount": 204,
+  "error": "Session export timed out",
+  "rubricScore": {
+    "passed": 0,
+    "total": 6,
+    "score": 0
+  },
+  "judged": "failure",
+  "judgeReasoning": "R1: failure, R2: failure, R3: failure, R4: failure, R5: failure, R6: failure",
+  "llmCalls": 34,
+  "toolCalls": 31,
+  "costUsd": 0.25114875
+}

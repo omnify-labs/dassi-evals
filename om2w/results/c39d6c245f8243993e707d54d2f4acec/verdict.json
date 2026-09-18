@@ -1,0 +1,17 @@
+{
+  "taskId": "c39d6c245f8243993e707d54d2f4acec",
+  "startedAt": "2026-09-17T23:27:18.798+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "The final skin in the list for the champion Ahri is **After Hours Spirit Blossom Springs Ahri** (skin 22 of 22).",
+  "agentFinalAnswer": "The final skin in the list for the champion Ahri is **After Hours Spirit Blossom Springs Ahri** (skin 22 of 22).",
+  "actionCount": 22,
+  "durationMs": 73237,
+  "screenshotCount": 73,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "Based on the provided web task instruction and the result response, the agent successfully browsed the final skin in the list for the champion Ahri and identified it with the corresponding details.\n\n**SUCCESS**",
+  "llmCalls": 22,
+  "toolCalls": 21,
+  "costUsd": 0.26295329999999995
+}

@@ -1,0 +1,17 @@
+{
+  "taskId": "52efbab520734ef9bf7c09ba0f62cdc8",
+  "startedAt": "2026-09-17T22:55:05.133+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "The iOS app for Recreation.gov is **Recreation.gov**, available on the Apple App Store at:\nhttps://apps.apple.com/us/app/recreation-gov/id1440487780",
+  "agentFinalAnswer": "The iOS app for Recreation.gov is **Recreation.gov**, available on the Apple App Store at:\nhttps://apps.apple.com/us/app/recreation-gov/id1440487780",
+  "actionCount": 8,
+  "durationMs": 27777,
+  "screenshotCount": 27,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "Based on the web task instruction to find the app for iOS, the agent successfully located the Recreation.gov app on the Apple App Store as depicted in the screenshots, and provided the correct application details and link in the result response.\n\nSUCCESS",
+  "llmCalls": 8,
+  "toolCalls": 7,
+  "costUsd": 0.07249185000000001
+}

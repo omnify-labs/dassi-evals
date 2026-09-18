@@ -1,0 +1,17 @@
+{
+  "taskId": "6ebde509dca8f15c0fa1bd74f071e8d6",
+  "startedAt": "2026-09-17T22:07:12.631+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "A Human Resources job was found on Target in Miami, Florida:\n\n- **Job Title:** Human Resource Expert\n- **Job ID:** R0000452946\n- **Location:** 7800 SW 104th St, Miami, FL 33156-2631\n- **Job Area:** Human Resources / Store Hourly\n- **Job Type / Schedule:** Part-time\n- **Pay Rate:** $16.75 USD per hour\n- **Posting URL:** https://corporate.target.com/jobs/w29/46/human-resource-expert",
+  "agentFinalAnswer": "A Human Resources job was found on Target in Miami, Florida:\n\n- **Job Title:** Human Resource Expert\n- **Job ID:** R0000452946\n- **Location:** 7800 SW 104th St, Miami, FL 33156-2631\n- **Job Area:** Human Resources / Store Hourly\n- **Job Type / Schedule:** Part-time\n- **Pay Rate:** $16.75 USD per hour\n- **Posting URL:** https://corporate.target.com/jobs/w29/46/human-resource-expert",
+  "actionCount": 32,
+  "durationMs": 107560,
+  "screenshotCount": 108,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "Based on the web task instruction, the goal was to search for a Human Resources job in Miami, Florida on Target. \n\nThe provided result response successfully locates a relevant job (\"Human Resource Expert\") at Target in Miami, Florida (7800 SW 104th St, Miami, FL 33156-2631). The screenshots further corroborate that the agent navigated to Target's career portal and successfully accessed this specific job listing, displaying matching details such as the Job ID (R0000452946), location, schedule type, and pay rate.\n\nThe result is complete, accurate, and fully satisfies the task requirements.\n\n**SUCCESS**",
+  "llmCalls": 32,
+  "toolCalls": 31,
+  "costUsd": 0.247144425
+}

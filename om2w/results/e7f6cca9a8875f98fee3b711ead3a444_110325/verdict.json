@@ -1,0 +1,17 @@
+{
+  "taskId": "e7f6cca9a8875f98fee3b711ead3a444_110325",
+  "startedAt": "2026-09-17T22:39:19.735+00:00",
+  "status": "error",
+  "nativeStopReason": "error",
+  "error": "Provider stopped with: PROHIBITED_CONTENT",
+  "answer": "",
+  "agentFinalAnswer": "",
+  "actionCount": 29,
+  "durationMs": 284135,
+  "screenshotCount": 284,
+  "judgedOfficial": "success",
+  "judged": "failure",
+  "llmCalls": 30,
+  "toolCalls": 29,
+  "costUsd": 0.3284769749999999
+}

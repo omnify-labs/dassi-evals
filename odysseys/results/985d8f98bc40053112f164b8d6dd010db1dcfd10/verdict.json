@@ -1,0 +1,22 @@
+{
+  "taskId": "985d8f98bc40053112f164b8d6dd010db1dcfd10",
+  "startedAt": "2026-09-18T00:34:12.384+00:00",
+  "status": "error",
+  "nativeStopReason": "aborted",
+  "error": "Stream idle timeout after 90000ms",
+  "answer": "",
+  "agentFinalAnswer": "",
+  "actionCount": 23,
+  "durationMs": 498285,
+  "screenshotCount": 501,
+  "rubricScore": {
+    "passed": 1,
+    "total": 6,
+    "score": 0.16666666666666666
+  },
+  "judged": "failure",
+  "judgeReasoning": "R1: failure, R2: failure, R3: failure, R4: failure, R5: success, R6: failure",
+  "llmCalls": 26,
+  "toolCalls": 23,
+  "costUsd": 0.316015875
+}

@@ -1,0 +1,21 @@
+{
+  "taskId": "08b3ee12dd124bd3f046bd568260110899dc8695",
+  "startedAt": "2026-09-18T00:36:02.310+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "Which nonprofit organization (name or EIN) would you like me to conduct this due-diligence review on? \n\nI have the IRS Tax Exempt Organization Search open and ready to begin as soon as you provide the name or EIN.",
+  "agentFinalAnswer": "Which nonprofit organization (name or EIN) would you like me to conduct this due-diligence review on? \n\nI have the IRS Tax Exempt Organization Search open and ready to begin as soon as you provide the name or EIN.",
+  "actionCount": 8,
+  "durationMs": 31667,
+  "screenshotCount": 32,
+  "rubricScore": {
+    "passed": 0,
+    "total": 7,
+    "score": 0
+  },
+  "judged": "failure",
+  "judgeReasoning": "R1: failure, R2: failure, R3: failure, R4: failure, R5: failure, R6: failure, R7: failure",
+  "llmCalls": 8,
+  "toolCalls": 7,
+  "costUsd": 0.09904410000000001
+}

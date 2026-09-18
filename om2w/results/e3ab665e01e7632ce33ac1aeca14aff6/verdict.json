@@ -1,0 +1,17 @@
+{
+  "taskId": "e3ab665e01e7632ce33ac1aeca14aff6",
+  "startedAt": "2026-09-17T22:57:21.596+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "The next available dates for **Alley Creek Camp** (Lake O' The Pines, Texas) begin on **September 17, 2026**. \n\nCampsites are available continuously from **September 17, 2026 through September 30, 2026** (the end of the current camping season). Following September 30, 2026, the campground closes for the season until March 1, 2027.",
+  "agentFinalAnswer": "The next available dates for **Alley Creek Camp** (Lake O' The Pines, Texas) begin on **September 17, 2026**. \n\nCampsites are available continuously from **September 17, 2026 through September 30, 2026** (the end of the current camping season). Following September 30, 2026, the campground closes for the season until March 1, 2027.",
+  "actionCount": 26,
+  "durationMs": 108513,
+  "screenshotCount": 109,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "The agent successfully navigated to the Recreation.gov page for Alley Creek Camp and identified the next available dates for campsites (starting from September 17, 2026, as shown on the interface). The result response correctly summarizes the availability and season details based on the platform data.\n\nSUCCESS",
+  "llmCalls": 26,
+  "toolCalls": 25,
+  "costUsd": 0.3651296249999999
+}

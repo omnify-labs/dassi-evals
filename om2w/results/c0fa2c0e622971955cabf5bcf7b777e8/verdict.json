@@ -1,0 +1,17 @@
+{
+  "taskId": "c0fa2c0e622971955cabf5bcf7b777e8",
+  "startedAt": "2026-09-17T22:35:40.137+00:00",
+  "status": "completed",
+  "nativeStopReason": "stop",
+  "answer": "The search on Apartments.com for rentals in Corning, CA with a maximum price of $1,500 has been completed.\n\nCurrent search URL:\nhttps://www.apartments.com/corning-ca/under-1500/?ss=Corning%2C+CA&ssps=2\n\nResults found directly in Corning, CA:\n1. 1515 Highway 99 W, Corning, CA 96021\n   - Studio: $900\n   - 1 Bed: $1,100\n\n2. 1517 Solano St Unit 1517, Corning, CA 96021\n   - 2 Beds, 1 Bath (950 sq ft): $1,175",
+  "agentFinalAnswer": "The search on Apartments.com for rentals in Corning, CA with a maximum price of $1,500 has been completed.\n\nCurrent search URL:\nhttps://www.apartments.com/corning-ca/under-1500/?ss=Corning%2C+CA&ssps=2\n\nResults found directly in Corning, CA:\n1. 1515 Highway 99 W, Corning, CA 96021\n   - Studio: $900\n   - 1 Bed: $1,100\n\n2. 1517 Solano St Unit 1517, Corning, CA 96021\n   - 2 Beds, 1 Bath (950 sq ft): $1,175",
+  "actionCount": 20,
+  "durationMs": 85185,
+  "screenshotCount": 85,
+  "judgedOfficial": "success",
+  "judged": "success",
+  "judgeReasoning": "Based on the provided instructions and screenshots, the agent successfully performed a search for rentals in Corning, CA with a maximum price of $1,500 on Apartments.com. The result response accurately details the search parameters and lists available rental options found matching the criteria shown in the screenshots (such as 1515 Highway 99 W and 1517 Solano St within the under $1,500 filter). \n\n**SUCCESS**",
+  "llmCalls": 20,
+  "toolCalls": 19,
+  "costUsd": 0.207376275
+}

@@ -1,0 +1,246 @@
+{
+  "dataset": "odysseys",
+  "metric": "success = every rubric of the task passed (\"Perfect\"); rubric_avg = mean per-task rubric score",
+  "model": "gemini-3.8-flash",
+  "judgeModel": "gemini-3.5-flash-lite",
+  "judgeProvider": "google",
+  "shards": [
+    {
+      "runState": "35279896775/results/2026-09-17T22-03-20/run-state.json",
+      "tasks": 25,
+      "startedAt": "2026-09-17T22:03:20.741Z"
+    },
+    {
+      "runState": "35279899353/results/2026-09-17T22-03-22/run-state.json",
+      "tasks": 25,
+      "startedAt": "2026-09-17T22:03:22.522Z"
+    },
+    {
+      "runState": "35279904988/results/2026-09-18T00-16-22/run-state.json",
+      "tasks": 25,
+      "startedAt": "2026-09-18T00:16:22.193Z"
+    },
+    {
+      "runState": "35279908345/results/2026-09-18T00-01-02/run-state.json",
+      "tasks": 25,
+      "startedAt": "2026-09-18T00:01:02.204Z"
+    },
+    {
+      "runState": "35279911157/results/2026-09-18T00-23-40/run-state.json",
+      "tasks": 8,
+      "startedAt": "2026-09-18T00:23:40.861Z"
+    },
+    {
+      "runState": "35279913818/results/2026-09-18T00-35-57/run-state.json",
+      "tasks": 25,
+      "startedAt": "2026-09-18T00:35:57.269Z"
+    },
+    {
+      "runState": "35279916467/results/2026-09-18T00-17-45/run-state.json",
+      "tasks": 25,
+      "startedAt": "2026-09-18T00:17:45.933Z"
+    },
+    {
+      "runState": "35302634899/results/2026-09-18T03-18-47/run-state.json",
+      "tasks": 13,
+      "startedAt": "2026-09-18T03:18:47.841Z"
+    },
+    {
+      "runState": "35302638739/results/2026-09-18T03-18-51/run-state.json",
+      "tasks": 12,
+      "startedAt": "2026-09-18T03:18:51.905Z"
+    },
+    {
+      "runState": "35302953267/results/2026-09-18T03-24-31/run-state.json",
+      "tasks": 9,
+      "startedAt": "2026-09-18T03:24:31.607Z"
+    },
+    {
+      "runState": "35302959678/results/2026-09-18T03-24-33/run-state.json",
+      "tasks": 8,
+      "startedAt": "2026-09-18T03:24:33.595Z"
+    },
+    {
+      "runState": "35303493831/results/2026-09-18T03-39-58/run-state.json",
+      "tasks": 3,
+      "startedAt": "2026-09-18T03:39:58.059Z"
+    },
+    {
+      "runState": "35307059911/results/2026-09-18T04-29-23/run-state.json",
+      "tasks": 8,
+      "startedAt": "2026-09-18T04:29:23.156Z"
+    },
+    {
+      "runState": "35307414914/results/2026-09-18T04-34-31/run-state.json",
+      "tasks": 3,
+      "startedAt": "2026-09-18T04:34:31.105Z"
+    },
+    {
+      "runState": "35311288110/results/2026-09-18T05-34-46/run-state.json",
+      "tasks": 2,
+      "startedAt": "2026-09-18T05:34:46.481Z"
+    }
+  ],
+  "overall": {
+    "tasks": 200,
+    "success": 183,
+    "success_rate": 0.915,
+    "rubric_avg": 0.9497261904761904,
+    "rubrics_passed": 1159,
+    "rubrics_total": 1225
+  },
+  "by_level": {
+    "easy": {
+      "tasks": 45,
+      "success": 43,
+      "success_rate": 0.9555555555555556,
+      "rubric_avg": 0.9722222222222222,
+      "rubrics_passed": 207,
+      "rubrics_total": 213
+    },
+    "hard": {
+      "tasks": 109,
+      "success": 101,
+      "success_rate": 0.926605504587156,
+      "rubric_avg": 0.939056356487549,
+      "rubrics_passed": 699,
+      "rubrics_total": 745
+    },
+    "medium": {
+      "tasks": 46,
+      "success": 39,
+      "success_rate": 0.8478260869565217,
+      "rubric_avg": 0.9530020703933748,
+      "rubrics_passed": 253,
+      "rubrics_total": 267
+    }
+  },
+  "status": {
+    "completed": 192,
+    "error": 3,
+    "timeout": 5
+  },
+  "not_reported_by_any_shard": [],
+  "rerun_no_result": [
+    {
+      "task_id": "407381583456934981fbca0f1b91e4fa8a0883b2",
+      "reason": "never started"
+    },
+    {
+      "task_id": "5bca23145f1a3e0eaf5d207c4fe3eb4275707ecc",
+      "reason": "never started"
+    },
+    {
+      "task_id": "1d20e51c4aa23eb68d37f1eaea56431140ae53c9",
+      "reason": "never started"
+    },
+    {
+      "task_id": "170314aa3a93c7ca6e959be7757cad178efc06dc",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "cbe12703e129832feb5e7b56c4141476fb423338",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "753ce2163f6e018ea33423ad4400ba3f759e9df8",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "ea8661bcf1150ea65b11aa0f2041cd4b1047d90f",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "e96aa77ab19737990cfa7a4da23533f2b0a0de92",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "45408d6942b6c26bd37b4675e183993602b940bb",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "7f9a7d1771191e31cdb77715a4207fcd469346ca",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "03328a94fec2dce938ded3959bdb6ea292c22186",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "24705fdf2d165f4f844984e62b4511396a88206d",
+      "reason": "never started"
+    },
+    {
+      "task_id": "c4b9782b4f76679169f1438e1e70addd96d7b518",
+      "reason": "never started"
+    },
+    {
+      "task_id": "d6007c19e6419c9eefdd57996fc151a2263b22fa",
+      "reason": "never started"
+    },
+    {
+      "task_id": "e8b73f739732f8aeb3c473d00f6219af5b8dcdb7",
+      "reason": "session export failed"
+    },
+    {
+      "task_id": "20cea7be868a6dbaca0c1ff8a04562101f3fbd91",
+      "reason": "session export failed"
+    }
+  ],
+  "no_result_not_rerun": [
+    "170314aa3a93c7ca6e959be7757cad178efc06dc",
+    "ea8661bcf1150ea65b11aa0f2041cd4b1047d90f",
+    "24705fdf2d165f4f844984e62b4511396a88206d",
+    "d6007c19e6419c9eefdd57996fc151a2263b22fa",
+    "e8b73f739732f8aeb3c473d00f6219af5b8dcdb7",
+    "20cea7be868a6dbaca0c1ff8a04562101f3fbd91"
+  ],
+  "judge_unknown": 0,
+  "bot_wall_seen": 89,
+  "per_task": {
+    "duration_s": {
+      "mean": 430.565,
+      "median": 362
+    },
+    "llm_calls": {
+      "mean": 66.1010101010101,
+      "median": 61
+    },
+    "tool_calls": {
+      "mean": 64.92424242424242,
+      "median": 60
+    },
+    "cost_usd": {
+      "mean": 0.8275888888888887,
+      "median": 0.6560999999999999,
+      "total": 163.86259999999996
+    }
+  },
+  "success_within_llm_calls": {
+    "100": 157,
+    "200": 182
+  },
+  "input_tokens_per_llm_call": 82031,
+  "tool_mix": {
+    "repl": {
+      "calls": 12492,
+      "share": 0.9717619603267211
+    },
+    "read": {
+      "calls": 255,
+      "share": 0.019836639439906652
+    },
+    "edit": {
+      "calls": 85,
+      "share": 0.0066122131466355505
+    },
+    "browser_screenshot": {
+      "calls": 21,
+      "share": 0.001633605600933489
+    },
+    "browser_read": {
+      "calls": 2,
+      "share": 0.0001555814858031894
+    }
+  }
+}

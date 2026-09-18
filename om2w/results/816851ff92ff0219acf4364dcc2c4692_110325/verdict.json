@@ -1,0 +1,15 @@
+{
+  "taskId": "816851ff92ff0219acf4364dcc2c4692_110325",
+  "startedAt": "2026-09-18T04:20:25.214+00:00",
+  "status": "timeout",
+  "answer": "",
+  "agentFinalAnswer": "",
+  "durationMs": 110332,
+  "screenshotCount": 104,
+  "error": "Session export timed out",
+  "judgedOfficial": "unknown",
+  "judged": "failure",
+  "llmCalls": 14,
+  "toolCalls": 14,
+  "costUsd": 0.101632275
+}
