@@ -55,18 +55,21 @@ function readJson(path) {
   return existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : undefined;
 }
 
-/** Cost, model calls and tool calls from a task's exported session. */
+/** Cost, model calls, input tokens and tool calls (by tool name) from a task's exported session. */
 function sessionStats(taskDir) {
   const evidence = readJson(join(taskDir, 'session-evidence.json'));
-  if (!evidence) return { costUsd: undefined, llmCalls: undefined, toolCalls: undefined };
+  if (!evidence) return {};
   const usage = evidence.usage ?? [];
-  const toolCalls = (evidence.messages ?? [])
+  const toolNames = (evidence.messages ?? [])
     .flatMap((m) => (Array.isArray(m.content) ? m.content : []))
-    .filter((block) => block.type === 'tool-call').length;
+    .filter((block) => block.type === 'tool-call')
+    .map((block) => block.toolName);
   return {
     costUsd: usage.reduce((sum, u) => sum + (u.usage?.cost?.total ?? 0), 0),
     llmCalls: usage.length,
-    toolCalls,
+    inputTokens: usage.reduce((sum, u) => sum + (u.usage?.input ?? 0) + (u.usage?.cacheRead ?? 0), 0),
+    toolCalls: toolNames.length,
+    toolNames,
   };
 }
 
@@ -171,6 +174,17 @@ const summary = {
     tool_calls: { mean: mean(nums(perTask, 'tool_calls')), median: median(nums(perTask, 'tool_calls')) },
     cost_usd: { mean: mean(nums(perTask, 'cost_usd')), median: median(nums(perTask, 'cost_usd')), total: nums(perTask, 'cost_usd').reduce((a, b) => a + b, 0) },
   },
+  input_tokens_per_llm_call: (() => {
+    const withUsage = [...rows.values()].filter((r) => r.llmCalls > 0);
+    const calls = withUsage.reduce((a, r) => a + r.llmCalls, 0);
+    return calls ? Math.round(withUsage.reduce((a, r) => a + r.inputTokens, 0) / calls) : null;
+  })(),
+  tool_mix: (() => {
+    const counts = {};
+    for (const r of rows.values()) for (const name of r.toolNames ?? []) counts[name] = (counts[name] ?? 0) + 1;
+    const total = Object.values(counts).reduce((a, b) => a + b, 0);
+    return Object.fromEntries(Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([name, n]) => [name, { calls: n, share: n / total }]));
+  })(),
 };
 
 mkdirSync(args.out, { recursive: true });
@@ -188,7 +202,7 @@ for (const [taskId, row] of rows) {
   for (const [from, to] of [['result.json', 'result.json'], ['session-evidence.json', 'session.json']]) {
     if (existsSync(join(row.taskDir, from))) copyFileSync(join(row.taskDir, from), join(dest, to));
   }
-  const { taskDir, costUsd, llmCalls, toolCalls, sessionId, operation, ...verdict } = row;
+  const { taskDir, costUsd, llmCalls, toolCalls, toolNames, inputTokens, sessionId, operation, ...verdict } = row;
   writeFileSync(join(dest, 'verdict.json'), JSON.stringify({ ...verdict, llmCalls, toolCalls, costUsd }, null, 2) + '\n');
 }
 
