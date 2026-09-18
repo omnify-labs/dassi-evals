@@ -18,9 +18,12 @@ If Chrome itself crashes, the harness restarts the browser and runs that task ag
 Two infrastructure failures are handled by re-running, under rules that do not depend on how any task scored:
 
 - **A shard killed by the runner** (out of memory, exit 137) is discarded in full and its tasks run again in fresh shards. None of the killed shard's results are used.
+- **A shard whose tasks all ran but whose grading failed** keeps its agent attempts; only the grading is redone. Agent attempts are never repeated to fix a grading failure.
 - **A task the agent never started** — the harness recorded an error in under 5 seconds with no answer, for example because Chrome failed to restart — is run again in a later shard, and that attempt is scored. A task the agent started is never re-run, whatever its outcome.
 
-Every re-run is listed in `results.json` (`rerun_never_started`) so it can be checked.
+- **A task the harness could not read back.** The agent ran, but the harness timed out reading the finished session out of the extension (`Session export timed out`), so there is no answer to grade. The task is run once more and that attempt is scored, even if it also comes back empty. The export exists only for benchmarking; users never see it.
+
+Every re-run is listed in `results.json` (`rerun_no_result`, with the reason) so it can be checked.
 
 ## Environment
 
@@ -59,6 +62,7 @@ Grading is automated. We use our own judge configuration, described here in full
 - Judge model: **`gemini-3.5-flash-lite`**. The Odysseys authors use `gemini-3.1-flash-lite-preview`; ours is the successor in the same model tier.
 - One judge call per rubric item. The judge sees that rubric's requirement and verification text, the agent's final answer, the action history, and the 8 most recent screenshots.
 - **Perfect** (headline): a task counts only if every one of its rubric items passes. **Rubric average**: mean of per-task pass fractions.
+- 53 tasks (CI runs 35279908345, 35279913818 and 35303493831) finished every task, but the CI job ended during grading after one Gemini API error (`503`). Those agent attempts are kept and graded outside CI with the same judge code, retrying provider errors. By then the upload step had removed the periodic screenshots, so the judge saw the last 8 per-action screenshots instead.
 - Differences from the reference scorer (`run_full_trajectory_per_rubric.py`): the reference shows the judge every step's screenshot and passes a rubric if any step satisfies it; ours shows the final 8 screenshots plus the full action history. The reference runs agents with a 100-step budget (some leaderboard entries disclose 200); ours has a time limit and no step cap. Tool-call counts per task are in `odysseys/tasks.csv`.
 
 ### Online-Mind2Web

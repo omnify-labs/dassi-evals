@@ -78,13 +78,19 @@ const taskById = new Map(tasks.map((t) => [t.id, t]));
 const runStates = findRunStates(args.shards);
 if (runStates.length === 0) throw new Error(`no run-state.json under ${args.shards}`);
 
-/** Same test the harness uses to detect a dead panel: an error in under 5 s with no answer. */
+/**
+ * A result with nothing to grade, superseded by a re-run (METHODOLOGY.md): the agent
+ * never started (the harness's own dead-panel test: an error in under 5 s, no answer),
+ * or the harness could not read the finished session back.
+ */
 const neverStarted = (r) => r.status === 'error' && r.durationMs < 5000 && !r.answer;
+const exportFailed = (r) => r.error === 'Session export timed out' && !r.answer;
+const noResult = (r) => neverStarted(r) || exportFailed(r);
 
 const identities = new Set();
 const rows = new Map();
 const shards = [];
-const rerunNeverStarted = [];
+const rerun = [];
 for (const path of runStates) {
   const resultsDir = dirname(path);
   const state = JSON.parse(readFileSync(path, 'utf8'));
@@ -102,12 +108,13 @@ for (const path of runStates) {
     const row = { ...r, taskDir: join(resultsDir, `task${r.taskId}`), ...sessionStats(join(resultsDir, `task${r.taskId}`)) };
     const earlier = rows.get(r.taskId);
     if (earlier) {
-      // The one duplicate allowed: a never-started result superseded by a real attempt (METHODOLOGY.md).
-      if (neverStarted(earlier) === neverStarted(row)) {
+      // The one duplicate allowed: a result with nothing to grade, superseded by its re-run.
+      // Shards are read oldest first, so the re-run is `row`; its result stands even if it
+      // also came back empty.
+      if (!noResult(earlier)) {
         throw new Error(`task ${r.taskId} appears in two shards — remove the superseded shard`);
       }
-      rerunNeverStarted.push(r.taskId);
-      if (neverStarted(row)) continue;
+      rerun.push({ task_id: r.taskId, reason: neverStarted(earlier) ? 'never started' : 'session export failed' });
     }
     rows.set(r.taskId, row);
   }
@@ -185,8 +192,8 @@ const summary = {
     [...new Set(perTask.map((t) => t.status))].sort().map((s) => [s, perTask.filter((t) => t.status === s).length]),
   ),
   not_reported_by_any_shard: perTask.filter((t) => !t.reported).map((t) => t.task_id),
-  rerun_never_started: rerunNeverStarted,
-  never_started_not_rerun: [...rows.values()].filter(neverStarted).map((r) => r.taskId),
+  rerun_no_result: rerun,
+  no_result_not_rerun: [...rows.values()].filter(noResult).map((r) => r.taskId),
   judge_unknown: perTask.filter((t) => t.verdict === 'unknown').length,
   bot_wall_seen: perTask.filter((t) => t.blocked !== '').length,
   per_task: {
@@ -232,5 +239,5 @@ console.log(`${args.dataset}: ${summary.overall.success}/${summary.overall.tasks
 if (args.dataset === 'om2w') console.log(`  WebJudge (secondary): ${summary.overall.webjudge_success}/${summary.overall.tasks}`);
 for (const [level, s] of Object.entries(summary.by_level)) console.log(`  ${level.padEnd(7)} ${s.success}/${s.tasks} = ${pct(s.success_rate)}`);
 if (summary.not_reported_by_any_shard.length) console.log(`  WARNING: ${summary.not_reported_by_any_shard.length} task(s) reported by no shard — scored as failures`);
-if (summary.never_started_not_rerun.length) console.log(`  WARNING: ${summary.never_started_not_rerun.length} task(s) never started and not re-run: ${summary.never_started_not_rerun.join(', ')}`);
-if (summary.rerun_never_started.length) console.log(`  re-run after never starting: ${summary.rerun_never_started.length}`);
+if (summary.no_result_not_rerun.length) console.log(`  WARNING: ${summary.no_result_not_rerun.length} task(s) with no gradable result and no re-run: ${summary.no_result_not_rerun.join(', ')}`);
+if (summary.rerun_no_result.length) console.log(`  re-run after no gradable result: ${summary.rerun_no_result.length}`);
