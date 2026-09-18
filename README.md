@@ -20,7 +20,7 @@ Dassi is a Chrome extension. It was run as shipped (release 0.74.1) on its defau
 | Rubric items passed | 1,159 / 1,225 (94.6%) |
 | Easy / Medium / Hard (Perfect) | 43/45 (95.6%) · 39/46 (84.8%) · 101/109 (92.7%) |
 | Perfect within 100 / 200 model calls | 157 (78.5%) · 182 (91.0%) |
-| Median tool calls per task | 60 (97.2% of all calls are code in the REPL) |
+| Median tool calls per task | 60 |
 | Median time per task | 6 min 2 s |
 | Median model cost per task | $0.66 |
 
@@ -33,7 +33,7 @@ Published Odysseys runs cap the agent at 100 or 200 steps; Dassi ran uncapped. T
 | Correct result (answer judge) | **289 / 300 (96.3%)** |
 | Easy / Medium / Hard | 78/80 (97.5%) · 135/141 (95.7%) · 76/79 (96.2%) |
 | WebJudge, which also grades the process | 274 / 300 (91.3%) |
-| Median tool calls per task | 31 (98.6% of all calls are code in the REPL) |
+| Median tool calls per task | 31 |
 | Median time per task | 2 min 14 s |
 | Median model cost per task | $0.32 |
 
