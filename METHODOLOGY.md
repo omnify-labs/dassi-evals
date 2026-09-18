@@ -13,7 +13,14 @@ Everything needed to interpret the numbers in this repository, including the pla
 | Budget | 30-minute wall-clock limit per task. **No step cap.** |
 | Logins | None. The browser profile is signed in to Dassi only; no website accounts or cookies are provisioned. |
 
-If Chrome itself crashes or cannot be restarted, the harness restarts the browser and runs that task again from the start; the agent never sees the earlier attempt. A task that still fails is recorded with `status: error` and scored as a failure.
+If Chrome itself crashes, the harness restarts the browser and runs that task again from the start; the agent never sees the earlier attempt. A task the agent started and did not finish is recorded with `status: error` or `timeout` and scored as a failure.
+
+Two infrastructure failures are handled by re-running, under rules that do not depend on how any task scored:
+
+- **A shard killed by the runner** (out of memory, exit 137) is discarded in full and its tasks run again in fresh shards. None of the killed shard's results are used.
+- **A task the agent never started** — the harness recorded an error in under 5 seconds with no answer, for example because Chrome failed to restart — is run again in a later shard, and that attempt is scored. A task the agent started is never re-run, whatever its outcome.
+
+Every re-run is listed in `results.json` (`rerun_never_started`) so it can be checked.
 
 ## Environment
 
@@ -41,7 +48,7 @@ The agent receives the dataset's task text inside a short wrapper.
 
 **Online-Mind2Web** — start at the task's website; work in one tab; no search engines; no cached or archived copies; finish with a plain-text final answer. This follows the maintainers' rule that a task starts from the specified site.
 
-**Odysseys** — start at the task's URL (always `https://www.google.com`); search engines and new tabs allowed; no cached or archived copies; if a site cannot be reached, say so rather than answering from memory; finish with a plain-text final answer.
+**Odysseys** — start at the task's URL (`https://www.google.com` for 130 of the 200 tasks; the other 70 start on one of 56 specific sites); search engines and new tabs allowed; no cached or archived copies; if a site cannot be reached, say so rather than answering from memory; finish with a plain-text final answer.
 
 ## Grading
 

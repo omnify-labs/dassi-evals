@@ -78,9 +78,13 @@ const taskById = new Map(tasks.map((t) => [t.id, t]));
 const runStates = findRunStates(args.shards);
 if (runStates.length === 0) throw new Error(`no run-state.json under ${args.shards}`);
 
+/** Same test the harness uses to detect a dead panel: an error in under 5 s with no answer. */
+const neverStarted = (r) => r.status === 'error' && r.durationMs < 5000 && !r.answer;
+
 const identities = new Set();
 const rows = new Map();
 const shards = [];
+const rerunNeverStarted = [];
 for (const path of runStates) {
   const resultsDir = dirname(path);
   const state = JSON.parse(readFileSync(path, 'utf8'));
@@ -95,8 +99,17 @@ for (const path of runStates) {
   shards.push({ runState: path.slice(args.shards.length + 1), tasks: state.results.length, startedAt: state.startedAt });
   for (const r of state.results) {
     if (!taskById.has(r.taskId)) throw new Error(`${path}: task ${r.taskId} is not in the dataset`);
-    if (rows.has(r.taskId)) throw new Error(`task ${r.taskId} appears in two shards — remove the superseded shard`);
-    rows.set(r.taskId, { ...r, taskDir: join(resultsDir, `task${r.taskId}`), ...sessionStats(join(resultsDir, `task${r.taskId}`)) });
+    const row = { ...r, taskDir: join(resultsDir, `task${r.taskId}`), ...sessionStats(join(resultsDir, `task${r.taskId}`)) };
+    const earlier = rows.get(r.taskId);
+    if (earlier) {
+      // The one duplicate allowed: a never-started result superseded by a real attempt (METHODOLOGY.md).
+      if (neverStarted(earlier) === neverStarted(row)) {
+        throw new Error(`task ${r.taskId} appears in two shards — remove the superseded shard`);
+      }
+      rerunNeverStarted.push(r.taskId);
+      if (neverStarted(row)) continue;
+    }
+    rows.set(r.taskId, row);
   }
 }
 if (identities.size !== 1) {
@@ -166,6 +179,8 @@ const summary = {
     [...new Set(perTask.map((t) => t.status))].sort().map((s) => [s, perTask.filter((t) => t.status === s).length]),
   ),
   not_reported_by_any_shard: perTask.filter((t) => !t.reported).map((t) => t.task_id),
+  rerun_never_started: rerunNeverStarted,
+  never_started_not_rerun: [...rows.values()].filter(neverStarted).map((r) => r.taskId),
   judge_unknown: perTask.filter((t) => t.verdict === 'unknown').length,
   bot_wall_seen: perTask.filter((t) => t.blocked !== '').length,
   per_task: {
@@ -210,3 +225,5 @@ const pct = (x) => (x * 100).toFixed(1) + '%';
 console.log(`${args.dataset}: ${summary.overall.success}/${summary.overall.tasks} = ${pct(summary.overall.success_rate)}  (agent ${identity.model}, judge ${args.dataset === 'om2w' ? identity.officialJudgeVersion : identity.judgeModel})`);
 for (const [level, s] of Object.entries(summary.by_level)) console.log(`  ${level.padEnd(7)} ${s.success}/${s.tasks} = ${pct(s.success_rate)}`);
 if (summary.not_reported_by_any_shard.length) console.log(`  WARNING: ${summary.not_reported_by_any_shard.length} task(s) reported by no shard — scored as failures`);
+if (summary.never_started_not_rerun.length) console.log(`  WARNING: ${summary.never_started_not_rerun.length} task(s) never started and not re-run: ${summary.never_started_not_rerun.join(', ')}`);
+if (summary.rerun_never_started.length) console.log(`  re-run after never starting: ${summary.rerun_never_started.length}`);
