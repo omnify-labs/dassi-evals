@@ -6,7 +6,7 @@ Everything needed to interpret the numbers in this repository, including the pla
 
 | | |
 |---|---|
-| Product | [Dassi](https://dassi.ai) Chrome extension, release **0.74.1**, unmodified |
+| Product | [Dassi](https://dassi.ai) Chrome extension, unmodified: release **0.74.1** for Odysseys and Online-Mind2Web, **0.79.0** for BU Bench V2 |
 | Model | `gemini-3.8-flash` — the default model a Dassi user gets with no configuration. Default reasoning settings. |
 | Interface | Dassi's standard tool surface: a JavaScript REPL over the page, accessibility-tree snapshots, element interaction, navigation and tabs. Screenshots are available to the agent but are not its primary observation. |
 | Attempts | One per task. No best-of-N, no human intervention, no per-task or per-site prompt tuning. |
@@ -23,6 +23,8 @@ Infrastructure failures are handled by these rules. None of them depends on how 
 - **A task the harness could not read back.** The agent ran, but the harness timed out reading the finished session out of the extension (`Session export timed out`), so there is no answer to grade. The task is run once more and that attempt is scored, even if it also comes back empty. The export exists only for benchmarking; users never see it.
 
 Every re-run is listed in `results.json` (`rerun_no_result`, with the reason) so it can be checked.
+
+**BU Bench V2 had no re-runs at all.** Six of its tasks hit a harness bug that differs from the read-back failure above: a status check the harness makes while the agent is still working took longer than 5 seconds, and the harness treated that as a timeout and stopped the agent mid-task. Those six are scored on whatever evidence existed at that point (four scored 0). They are marked `harness: status check timed out` in `bubench-v2/tasks.csv`.
 
 ## Environment
 
@@ -41,6 +43,7 @@ No CAPTCHA-solving service is used. When the agent meets a bot check it may atte
 |---|---|---|
 | [Online-Mind2Web](https://huggingface.co/datasets/osunlp/Online-Mind2Web) | `6aa56e07c9d247fcc2b72fc3d94ad0f857f1e5d4` | 300 (80 easy / 141 medium / 79 hard) |
 | [Odysseys](https://github.com/ljang0/Odysseys) | `95307c76f296292ed8ab9d55bc856095e3eabee5` | 200 (45 easy / 46 medium / 109 hard), 1,225 rubric items |
+| [BU Bench V2](https://github.com/browser-use/benchmark) | `421390ea7fa4708f3d89d7695f9a16debb861daf` (predates Browser Use's 2026-09-24 fixes to seven task rubrics) | 200, one weighted findings rubric each |
 
 Every task in each set was run. A task that produced no result is scored as a failure, never dropped.
 
@@ -50,11 +53,13 @@ The agent receives the dataset's task text inside a short wrapper.
 
 **Online-Mind2Web** — start at the task's website; work in one tab; no search engines; no cached or archived copies; finish with a plain-text final answer. This follows the maintainers' rule that a task starts from the specified site.
 
+**BU Bench V2** — each task names its own starting site inline; the agent may search and open tabs; finish with a plain-text final answer.
+
 **Odysseys** — start at the task's URL (`https://www.google.com` for 130 of the 200 tasks; the other 70 start on one of 56 specific sites); search engines and new tabs allowed; no cached or archived copies; if a site cannot be reached, say so rather than answering from memory; finish with a plain-text final answer.
 
 ## Grading
 
-Grading is automated. We use our own judge configuration, described here in full. **These scores were not produced by, submitted to, or verified by either benchmark's maintainers.**
+Grading is automated. We use our own judge configuration, described here in full. **These scores were not produced by, submitted to, or verified by any of the benchmarks’ maintainers.**
 
 ### Odysseys
 
@@ -93,6 +98,16 @@ Aside and Browser Use also grade Online-Mind2Web on the result with their own LL
 - In 18 of the 23, WebJudge objects only to how the result was reached: a filter or sort applied in code rather than by clicking it.
 - In 5, WebJudge says the result itself falls short, and we count them as contested: `9d090a15…`, `9af05e39…`, `5dec0e66…`, `c6c9dc60…`, `a48e2f1e…`. Without them the headline would be 284/300.
 - In none of them does WebJudge say the answer was made up rather than read from the page.
+
+### BU Bench V2
+
+- Judge model: **`gemini-3.5-flash-lite`**. Browser Use's current runner uses `gpt-5.6-luna` at xhigh reasoning.
+- The judge is our port of Browser Use's published `findings_judge.py` prompt: one call grades the whole rubric, reporting each item as met, violated or not assessable, and code applies Browser Use's item weights. It sees the task, the rubric, the agent's step history, the final answer and the 8 most recent screenshots. Browser Use notes that the published file's image handling differs from the internal evaluator behind their chart, so this is a reconstruction, not their evaluator.
+- A reward-hacking flag from the judge, or the task's canary string appearing in the agent's text, zeroes the task, as in the reference.
+- **Score** (headline): mean of per-task weighted scores, 0 to 100. The harness logs per-task scores rounded to whole numbers; `tasks.csv` carries those, and the headline uses the exact per-shard means.
+- Budget: 30-minute limit, no step cap. Browser Use's public runner defaults to 30 minutes and 100 steps.
+- **Cost sample.** The full run's session archives failed to upload, so cost was measured separately: 20 tasks (every tenth, `bu2-005` to `bu2-195`) re-run on the same release, summing the recorded cost of every model call. Those 20 scored 85.6 against 84.7 for the full run. Prices are Gemini 3.8 Flash's introductory rates, which double on 2027-01-01.
+- **Not published.** Browser Use asks that decrypted tasks and traces not be published, so there is no task text, answer, session or screenshot in `bubench-v2/`.
 
 ## Reading the per-task files
 
