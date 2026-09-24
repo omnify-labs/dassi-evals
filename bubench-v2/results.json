@@ -1,0 +1,88 @@
+{
+  "dataset": "bubenchv2",
+  "dataset_source": "github.com/browser-use/benchmark BU_Bench_V2.enc at 421390ea7fa4708f3d89d7695f9a16debb861daf (predates the 2026-09-24 rubric fixes)",
+  "metric": "mean weighted findings score, 0-100 per task (rubric credit after penalties); perfect = every rubric item met",
+  "agent": "dassi 0.79.0",
+  "model": "gemini-3.8-flash",
+  "judgeModel": "gemini-3.5-flash-lite",
+  "judgeProvider": "google",
+  "limits": {
+    "per_task_timeout_s": 1800,
+    "step_cap": null,
+    "attempts": 1
+  },
+  "shards": [
+    {
+      "run": "35926817626",
+      "tasks": 67,
+      "mean_score": 84.9
+    },
+    {
+      "run": "35927317893",
+      "tasks": 66,
+      "mean_score": 86.0
+    },
+    {
+      "run": "35926829005",
+      "tasks": 66,
+      "mean_score": 84.5
+    }
+  ],
+  "overall": {
+    "tasks": 200,
+    "mean_score": 84.7,
+    "mean_score_excluding_not_run": 85.1,
+    "perfect": 126,
+    "perfect_rate": 63.0,
+    "mean_score_source": "exact per-shard means reported by the harness (84.9 over 67, 86.0 over 66, 84.5 over 66); bu2-002 counted as 0"
+  },
+  "by_subset": {
+    "public_55": {
+      "tasks": 55,
+      "mean_score": 92.0
+    },
+    "other_145": {
+      "tasks": 145,
+      "mean_score": 82.0
+    },
+    "note": "computed from the per-task scores in tasks.csv, which the harness logs rounded to whole numbers"
+  },
+  "status": {
+    "completed": 188,
+    "not_run": 1,
+    "timeout": 7,
+    "error": 4
+  },
+  "failure_class": {
+    "site unreachable (DNS) on run day": 1,
+    "harness: status check timed out": 6,
+    "provider: content-safety stop": 1,
+    "agent: 30-minute limit": 1,
+    "provider: HTTP 400": 3
+  },
+  "per_task": {
+    "duration_s": {
+      "mean": 419,
+      "median": 341
+    }
+  },
+  "cost_sample": {
+    "note": "20 tasks (every tenth, bu2-005..bu2-195) re-run on dassi 0.79.0; agent model calls only, judge excluded; Gemini 3.8 Flash introductory pricing (doubles 2027-01-01)",
+    "runs": [
+      "35973495208",
+      "35973502355"
+    ],
+    "tasks": 20,
+    "cost_usd": {
+      "mean": 0.922,
+      "median": 1.005,
+      "min": 0.3252,
+      "max": 1.5393,
+      "total": 18.44
+    },
+    "llm_calls_mean": 67,
+    "cached_input_share": 0.936,
+    "mean_score": 85.6
+  },
+  "not_published": "Task text, agent answers, sessions and screenshots: Browser Use asks that decrypted tasks and traces not be published."
+}
