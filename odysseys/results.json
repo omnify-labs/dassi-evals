@@ -1,6 +1,6 @@
 {
   "dataset": "odysseys",
-  "metric": "success = every rubric of the task passed (\"Perfect\"); rubric_avg = mean per-task rubric score",
+  "metric": "headline: official scorer, no step cap. Legacy: our own rubric judge on gemini-3.5-flash-lite (perfect/rubric_avg fields).",
   "model": "gemini-3.8-flash",
   "judgeModel": "gemini-3.5-flash-lite",
   "judgeProvider": "google",
@@ -242,5 +242,67 @@
       "calls": 2,
       "share": 0.0001555814858031894
     }
+  },
+  "official_scorer": {
+    "scorer": "ljang0/Odysseys scripts/python/run_full_trajectory_per_rubric.py @95307c76f296292ed8ab9d55bc856095e3eabee5, unmodified",
+    "judge_model": "gemini-3.1-flash-lite-preview (the scorer's default)",
+    "evidence": "each published attempt's full action history and one screenshot per step, converted by scripts/odysseys-official-regrade.py; 194 tasks with evidence, 6 with no result count as failures",
+    "no_step_cap": {
+      "perfect": 170,
+      "perfect_rate": 0.85,
+      "by_level": {
+        "easy": {
+          "tasks": 45,
+          "perfect": 40
+        },
+        "medium": {
+          "tasks": 46,
+          "perfect": 36
+        },
+        "hard": {
+          "tasks": 109,
+          "perfect": 94
+        }
+      },
+      "rubric_items_passed": 1142,
+      "rubric_items_total": 1225
+    },
+    "within_200_steps": {
+      "perfect": 169,
+      "perfect_rate": 0.845,
+      "by_level": {
+        "easy": {
+          "tasks": 45,
+          "perfect": 40
+        },
+        "medium": {
+          "tasks": 46,
+          "perfect": 36
+        },
+        "hard": {
+          "tasks": 109,
+          "perfect": 93
+        }
+      }
+    },
+    "within_100_steps_scorer_default": {
+      "perfect": 150,
+      "perfect_rate": 0.75,
+      "by_level": {
+        "easy": {
+          "tasks": 45,
+          "perfect": 40
+        },
+        "medium": {
+          "tasks": 46,
+          "perfect": 32
+        },
+        "hard": {
+          "tasks": 109,
+          "perfect": 78
+        }
+      }
+    },
+    "note": "A dassi step is one model call, which can run several browser actions."
   }
 }
