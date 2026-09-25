@@ -6,9 +6,9 @@ Full results, per-task logs and grading details for [Dassi](https://dassi.ai) on
 - **[Online-Mind2Web](https://github.com/OSU-NLP-Group/Online-Mind2Web)** — 300 tasks across 136 live websites.
 - **[BU Bench V2](https://github.com/browser-use/benchmark)** — 200 long web tasks from Browser Use, graded against weighted findings rubrics. Scores and costs only; see below for why there are no per-task logs.
 
-Dassi is a Chrome extension, run as shipped with one attempt per task: release 0.74.1 on its default model `gemini-3.8-flash` for Odysseys and Online-Mind2Web; release 0.80.0 on DeepSeek V4.1 Flash, and release 0.79.0 on `gemini-3.8-flash`, for BU Bench V2.
+Dassi is a Chrome extension, run as shipped with one attempt per task: release 0.74.1 on its default model `gemini-3.8-flash` for Odysseys and Online-Mind2Web; release 0.80.0 on DeepSeek V4.1 Flash and on `gemini-3.8-flash` for BU Bench V2.
 
-> **How these were graded.** Scores come from automated LLM judges that we ran ourselves, all on `gemini-3.5-flash-lite`. Odysseys is graded rubric by rubric. Online-Mind2Web is graded on whether the final result is right, however the agent got there. We also report Online-Mind2Web's own WebJudge, which grades the process too. None of these scores has been submitted to or verified by either benchmark's maintainers. [METHODOLOGY.md](METHODOLOGY.md) lists every difference from the reference protocols.
+> **How these were graded.** Scores come from automated LLM judges that we ran ourselves: Odysseys and Online-Mind2Web on `gemini-3.5-flash-lite`, BU Bench V2 with Browser Use's own judge code on `gemini-3.8-flash`. Odysseys is graded rubric by rubric. Online-Mind2Web is graded on whether the final result is right, however the agent got there. We also report Online-Mind2Web's own WebJudge, which grades the process too. None of these scores has been submitted to or verified by either benchmark's maintainers. [METHODOLOGY.md](METHODOLOGY.md) lists every difference from the reference protocols.
 
 ## Results
 
@@ -53,14 +53,21 @@ The task set is Browser Use's public 55-task subset (`BU_Bench_V2_55.json`, `bu2
 
 Files: [`bubench-v2/deepseek-v4.1-flash/results.json`](bubench-v2/deepseek-v4.1-flash/results.json) (summary) and [`bubench-v2/deepseek-v4.1-flash/tasks.csv`](bubench-v2/deepseek-v4.1-flash/tasks.csv) (score, rubric counts, tokens and cost per task id).
 
-### BU Bench V2 — 200 tasks, graded with a lenient judge (being regraded)
+### BU Bench V2 — same 55 tasks, Gemini 3.8 Flash
 
 | Metric | Dassi (`gemini-3.8-flash`) |
 |---|---|
-| Mean weighted findings score, own `gemini-3.5-flash-lite` judge | 84.7 |
-| Model cost per task, 20-task sample | mean $0.92 · median $1.01 |
+| Mean weighted findings score (0 to 100) | **56.9** |
+| Mean over the 54 tasks that ran | 58.0 |
+| Tasks with every rubric item met | 5 / 55 |
+| Tasks zeroed for reward hacking | 5 |
+| Model cost per task | **$1.01** mean · $0.90 median · $0.45 to $2.65 (introductory list price, doubles on 2027-01-01) |
+| Model cost for the whole run | $54.72 |
+| Time per task | 8.7 min mean · 8.2 min median |
 
-**Do not compare this score.** Our own port of the findings judge on `gemini-3.5-flash-lite` turned out to be far more lenient than Browser Use's judge: on three sampled tasks it gave 100, 100 and 100 where Browser Use's judge gave 88, 48 and 0. This run is being redone on the 55-task subset and graded like the DeepSeek run above. Files: [`bubench-v2/results.json`](bubench-v2/results.json), [`bubench-v2/tasks.csv`](bubench-v2/tasks.csv), [`bubench-v2/cost-sample.csv`](bubench-v2/cost-sample.csv).
+Same release, task set, harness and judge as the DeepSeek run, at the same reasoning level (high). The judge model here is the same as the agent model, so any self-preference would favour this run. DeepSeek scored higher on 40 of the 54 tasks, Gemini on 9, with 5 ties. Files: [`bubench-v2/gemini-3.8-flash/results.json`](bubench-v2/gemini-3.8-flash/results.json), [`bubench-v2/gemini-3.8-flash/tasks.csv`](bubench-v2/gemini-3.8-flash/tasks.csv).
+
+An earlier 200-task Gemini result (84.7) was graded by our own port of the judge on `gemini-3.5-flash-lite`, which proved far too lenient. It has been withdrawn and its files removed; they remain in this repository's history.
 
 Browser Use asks that decrypted tasks and traces not be published, so the BU Bench V2 folders have no task text, answers, sessions or screenshots.
 
@@ -117,9 +124,7 @@ om2w/
   (same structure)
 bubench-v2/
   deepseek-v4.1-flash/  55-task subset graded with Browser Use's judge: results.json · tasks.csv
-  results.json          gemini-3.8-flash, 200 tasks, lenient judge (being regraded)
-  tasks.csv             score and status per task id (no task text)
-  cost-sample.csv       tokens and cost for 20 tasks
+  gemini-3.8-flash/     same, for gemini-3.8-flash
 scripts/aggregate.mjs   merges the CI shards into the files above
 scripts/bu-judge-regrade.py  grades saved runs with Browser Use's judge code
 METHODOLOGY.md          agent setup, environment, prompts, grading, known differences

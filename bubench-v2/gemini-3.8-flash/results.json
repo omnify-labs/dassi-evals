@@ -1,0 +1,56 @@
+{
+  "dataset": "bubenchv2",
+  "task_set": "BU Bench V2 55-task public subset (BU_Bench_V2_55.json, bu2-001..bu2-055)",
+  "dataset_source": "github.com/browser-use/benchmark BU_Bench_V2.enc at cc09d941feb5ad2e103c99af6b4792305ac5d3ec",
+  "agent": "dassi 0.80.0 (unmodified extension)",
+  "model": "gemini-3.8-flash",
+  "reasoning": "high (dassi's main-agent thinking level)",
+  "limits": {
+    "per_task_timeout_s": 1800,
+    "step_cap": null,
+    "attempts": 1
+  },
+  "judge": {
+    "code": "Browser Use's evaluation.judge_trace + findings_judge.py at cc09d941",
+    "model": "gemini-3.8-flash",
+    "max_output_tokens": 32768,
+    "temperature": 0,
+    "note": "the judge is the same model as the agent here, so any self-preference would favour this run"
+  },
+  "overall": {
+    "tasks": 55,
+    "mean_score": 56.9,
+    "mean_score_tasks_run": 58.0,
+    "perfect": 5,
+    "reward_hacking_zeroed": 5,
+    "status": {
+      "completed": 54,
+      "timeout": 0,
+      "not_run": 1
+    }
+  },
+  "cost": {
+    "pricing": "Gemini 3.8 Flash introductory list price per 1M tokens: input /bin/zsh.75, cached input /bin/zsh.075, output .75 (doubles 2027-01-01)",
+    "cost_usd_per_task": {
+      "mean": 1.013,
+      "median": 0.901,
+      "min": 0.4452,
+      "max": 2.6468,
+      "total": 54.72
+    },
+    "llm_calls_mean": 70,
+    "judge_cost": "excluded"
+  },
+  "time": {
+    "minutes_per_task_mean": 8.7,
+    "minutes_per_task_median": 8.2
+  },
+  "runs": [
+    "36096705033",
+    "36096706903",
+    "36096708582",
+    "36096710776",
+    "36096712824"
+  ],
+  "not_published": "Task text, answers, sessions and screenshots: Browser Use asks that decrypted tasks and traces not be published."
+}

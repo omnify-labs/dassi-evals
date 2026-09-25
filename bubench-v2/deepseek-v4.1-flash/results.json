@@ -4,7 +4,7 @@
   "dataset_source": "github.com/browser-use/benchmark BU_Bench_V2.enc at cc09d941feb5ad2e103c99af6b4792305ac5d3ec (sha256 fe9ce279\u2026, the file BU_Bench_V2_55.json pins)",
   "agent": "dassi 0.80.0 (unmodified extension)",
   "model": "deepseek-v4-flash-vision-exp (served as DeepSeek V4.1 Flash by the DeepSeek API)",
-  "reasoning": "dassi default",
+  "reasoning": "high (dassi's main-agent thinking level; sent as reasoning_effort=high)",
   "limits": {
     "per_task_timeout_s": 1800,
     "step_cap": null,
