@@ -6,7 +6,7 @@ Everything needed to interpret the numbers in this repository, including the pla
 
 | | |
 |---|---|
-| Product | [Dassi](https://dassi.ai) Chrome extension, unmodified: release **0.74.1** for Odysseys and Online-Mind2Web, **0.79.0** for BU Bench V2 |
+| Product | [Dassi](https://dassi.ai) Chrome extension, unmodified: release **0.74.1** for Odysseys and Online-Mind2Web, **0.80.0** for BU Bench V2 |
 | Model | `gemini-3.8-flash` — the default model a Dassi user gets with no configuration. Default reasoning settings. |
 | Interface | Dassi's standard tool surface: a JavaScript REPL over the page, accessibility-tree snapshots, element interaction, navigation and tabs. Screenshots are available to the agent but are not its primary observation. |
 | Attempts | One per task. No best-of-N, no human intervention, no per-task or per-site prompt tuning. |
@@ -24,7 +24,7 @@ Infrastructure failures are handled by these rules. None of them depends on how 
 
 Every re-run is listed in `results.json` (`rerun_no_result`, with the reason) so it can be checked.
 
-**BU Bench V2 had no re-runs at all.** Six of its tasks hit a harness bug that differs from the read-back failure above: a status check the harness makes while the agent is still working took longer than 5 seconds, and the harness treated that as a timeout and stopped the agent mid-task. Those six are scored on whatever evidence existed at that point (four scored 0). They are marked `harness: status check timed out` in `bubench-v2/tasks.csv`.
+**BU Bench V2 had no re-runs at all.** A task that hit the 30-minute limit is graded on the evidence it had produced by then (four tasks in the DeepSeek run, none in the Gemini run).
 
 ## Environment
 
@@ -99,22 +99,14 @@ Aside and Browser Use also grade Online-Mind2Web on the result with their own LL
 - In 5, WebJudge says the result itself falls short, and we count them as contested: `9d090a15…`, `9af05e39…`, `5dec0e66…`, `c6c9dc60…`, `a48e2f1e…`. Without them the headline would be 284/300.
 - In none of them does WebJudge say the answer was made up rather than read from the page.
 
-### BU Bench V2 with Browser Use's judge (DeepSeek V4.1 Flash run)
+### BU Bench V2 with Browser Use's judge
 
-- Agent: Dassi 0.80.0, unmodified, on `deepseek-v4-flash-vision-exp`, which the DeepSeek API serves as V4.1 Flash; it is the DeepSeek id Dassi sends screenshots to. Default reasoning. The judge never shares the agent's provider.
+- Agent: Dassi 0.80.0, unmodified, on `deepseek-v4-flash-vision-exp`, which the DeepSeek API serves as V4.1 Flash; it is the DeepSeek id Dassi sends screenshots to. Reasoning level high, Dassi's main-agent setting, sent as `reasoning_effort: high`. The Gemini 3.8 Flash run uses the same release, tasks, reasoning level and judge.
 - Tasks: the 55-task public subset at the dataset revision `BU_Bench_V2_55.json` pins (`cc09d941`), run as five shards of 10 or 11 tasks, one attempt each, 30-minute limit, no step cap.
 - Judge: Browser Use's `evaluation.judge_trace` at `cc09d941`, called directly from [`scripts/bu-judge-regrade.py`](scripts/bu-judge-regrade.py) on the saved runs. Browser Use's code decrypts the tasks and supplies the rubric and weights; the script supplies Dassi's final answer, its step history, and its screenshots (up to 50 after Browser Use's own selection). Model `gemini-3.8-flash`, 32,768 output tokens, temperature 0. Browser Use uses `gpt-5.6-luna` at xhigh reasoning. Two adaptations: Google's finish code `STOP` is mapped to the `stop` Browser Use's code expects, and the four timed-out tasks, which wrote no final answer file, have their steps rebuilt from the saved session.
-- Cost: the sum of each model call's tokens at DeepSeek's V4.1 Flash list price. All calls fell in DeepSeek's off-peak hours; the peak price is double. Judge cost is excluded, as in Browser Use's chart.
+- Cost: the sum of each model call's tokens at list price. DeepSeek V4.1 Flash: all calls fell in DeepSeek's off-peak hours; the peak price is double. Gemini 3.8 Flash: introductory price, which doubles on 2027-01-01. Judge cost is excluded, as in Browser Use's chart.
 
-### BU Bench V2
-
-- Judge model: **`gemini-3.5-flash-lite`**. Browser Use's current runner uses `gpt-5.6-luna` at xhigh reasoning.
-- The judge is our port of Browser Use's published `findings_judge.py` prompt: one call grades the whole rubric, reporting each item as met, violated or not assessable, and code applies Browser Use's item weights. It sees the task, the rubric, the agent's step history, the final answer and the 8 most recent screenshots. Browser Use notes that the published file's image handling differs from the internal evaluator behind their chart, so this is a reconstruction, not their evaluator.
-- A reward-hacking flag from the judge, or the task's canary string appearing in the agent's text, zeroes the task, as in the reference.
-- **Score** (headline): mean of per-task weighted scores, 0 to 100. The harness logs per-task scores rounded to whole numbers; `tasks.csv` carries those, and the headline uses the exact per-shard means.
-- Budget: 30-minute limit, no step cap. Browser Use's public runner defaults to 30 minutes and 100 steps.
-- **Cost sample.** The full run's session archives failed to upload, so cost was measured separately: 20 tasks (every tenth, `bu2-005` to `bu2-195`) re-run on the same release, summing the recorded cost of every model call. Those 20 scored 85.6 against 84.7 for the full run. Prices are Gemini 3.8 Flash's introductory rates, which double on 2027-01-01.
-- **Not published.** Browser Use asks that decrypted tasks and traces not be published, so there is no task text, answer, session or screenshot in `bubench-v2/`.
+An earlier Gemini 3.8 Flash result on all 200 tasks was graded by our own port of the judge on `gemini-3.5-flash-lite`. It proved far too lenient and has been withdrawn.
 
 ## Reading the per-task files
 
