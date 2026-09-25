@@ -1,0 +1,61 @@
+{
+  "dataset": "bubenchv2",
+  "task_set": "BU Bench V2 55-task public subset (BU_Bench_V2_55.json, bu2-001..bu2-055)",
+  "dataset_source": "github.com/browser-use/benchmark BU_Bench_V2.enc at cc09d941feb5ad2e103c99af6b4792305ac5d3ec (sha256 fe9ce279\u2026, the file BU_Bench_V2_55.json pins)",
+  "agent": "dassi 0.80.0 (unmodified extension)",
+  "model": "deepseek-v4-flash-vision-exp (served as DeepSeek V4.1 Flash by the DeepSeek API)",
+  "reasoning": "dassi default",
+  "limits": {
+    "per_task_timeout_s": 1800,
+    "step_cap": null,
+    "attempts": 1
+  },
+  "judge": {
+    "code": "Browser Use's evaluation.judge_trace + findings_judge.py at cc09d941 (their prompt, schema, coverage check, weights, reward-hacking/canary scoring, up to 50 screenshots)",
+    "model": "gemini-3.8-flash",
+    "max_output_tokens": 32768,
+    "temperature": 0,
+    "difference_from_reference": "Browser Use runs this judge on gpt-5.6-luna with xhigh reasoning; their Google adapter needs FinishReason.STOP mapped to 'stop'",
+    "cross_check": {
+      "model": "gemini-3.1-pro-preview",
+      "mean_score_55": 81.9
+    }
+  },
+  "overall": {
+    "tasks": 55,
+    "mean_score": 79.0,
+    "mean_score_tasks_run": 80.5,
+    "perfect": 18,
+    "status": {
+      "completed": 50,
+      "timeout": 4,
+      "not_run": 1
+    }
+  },
+  "cost": {
+    "pricing": "DeepSeek V4.1 Flash list price per 1M tokens: input /bin/zsh.15 off-peak / /bin/zsh.30 peak, cache hit /bin/zsh.003 / /bin/zsh.006, output /bin/zsh.60 / .20; the whole run fell in off-peak hours",
+    "cost_usd_per_task_offpeak": {
+      "mean": 0.08,
+      "median": 0.079,
+      "min": 0.032,
+      "max": 0.1353,
+      "total": 4.34
+    },
+    "cost_usd_per_task_peak_mean": 0.161,
+    "judge_cost": "excluded, as in Browser Use's chart",
+    "llm_calls_mean": 64,
+    "cached_input_share": 0.964
+  },
+  "time": {
+    "minutes_per_task_mean": 14.7,
+    "minutes_per_task_median": 13.1
+  },
+  "runs": [
+    "36043717777",
+    "36043640330",
+    "36043644031",
+    "36043648261",
+    "36043652932"
+  ],
+  "not_published": "Task text, answers, sessions and screenshots: Browser Use asks that decrypted tasks and traces not be published."
+}

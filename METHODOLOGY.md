@@ -99,6 +99,13 @@ Aside and Browser Use also grade Online-Mind2Web on the result with their own LL
 - In 5, WebJudge says the result itself falls short, and we count them as contested: `9d090a15…`, `9af05e39…`, `5dec0e66…`, `c6c9dc60…`, `a48e2f1e…`. Without them the headline would be 284/300.
 - In none of them does WebJudge say the answer was made up rather than read from the page.
 
+### BU Bench V2 with Browser Use's judge (DeepSeek V4.1 Flash run)
+
+- Agent: Dassi 0.80.0, unmodified, on `deepseek-v4-flash-vision-exp`, which the DeepSeek API serves as V4.1 Flash; it is the DeepSeek id Dassi sends screenshots to. Default reasoning. The judge never shares the agent's provider.
+- Tasks: the 55-task public subset at the dataset revision `BU_Bench_V2_55.json` pins (`cc09d941`), run as five shards of 10 or 11 tasks, one attempt each, 30-minute limit, no step cap.
+- Judge: Browser Use's `evaluation.judge_trace` at `cc09d941`, called directly from [`scripts/bu-judge-regrade.py`](scripts/bu-judge-regrade.py) on the saved runs. Browser Use's code decrypts the tasks and supplies the rubric and weights; the script supplies Dassi's final answer, its step history, and its screenshots (up to 50 after Browser Use's own selection). Model `gemini-3.8-flash`, 32,768 output tokens, temperature 0. Browser Use uses `gpt-5.6-luna` at xhigh reasoning. Two adaptations: Google's finish code `STOP` is mapped to the `stop` Browser Use's code expects, and the four timed-out tasks, which wrote no final answer file, have their steps rebuilt from the saved session.
+- Cost: the sum of each model call's tokens at DeepSeek's V4.1 Flash list price. All calls fell in DeepSeek's off-peak hours; the peak price is double. Judge cost is excluded, as in Browser Use's chart.
+
 ### BU Bench V2
 
 - Judge model: **`gemini-3.5-flash-lite`**. Browser Use's current runner uses `gpt-5.6-luna` at xhigh reasoning.
