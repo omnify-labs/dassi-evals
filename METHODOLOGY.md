@@ -63,12 +63,10 @@ Grading is automated. We use our own judge configuration, described here in full
 
 ### Odysseys
 
-- Judge model: **`gemini-3.5-flash-lite`**. The Odysseys authors use `gemini-3.1-flash-lite-preview`; ours is the successor in the same model tier.
-- One judge call per rubric item. The judge sees that rubric's requirement and verification text, the agent's final answer, the action history, and the 8 most recent screenshots.
-- **Perfect** (headline): a task counts only if every one of its rubric items passes. **Rubric average**: mean of per-task pass fractions.
-- 53 tasks (CI runs 35279908345, 35279913818 and 35303493831) finished every task, but the CI job ended during grading after one Gemini API error (`503`). Those agent attempts are kept and graded outside CI with the same judge code, retrying provider errors. By then the upload step had removed the periodic screenshots, so the judge saw the last 8 per-action screenshots instead.
-- Differences from the reference scorer (`run_full_trajectory_per_rubric.py`): the reference shows the judge every step's screenshot and passes a rubric if any step satisfies it; ours shows the final 8 screenshots plus the full action history. The reference runs agents with a 100-step budget (some leaderboard entries disclose 200); ours has a time limit and no step cap.
-- **Step budgets.** To compare with capped runs, `odysseys/results.json` counts the tasks that were perfect within 100 and 200 model calls (`success_within_llm_calls`). A model call is not the same unit as a step for a screenshot-and-click agent: one Dassi model call can run a code block that performs several browser actions. Per-task model-call and tool-call counts are in `odysseys/tasks.csv`.
+- **Headline: the official scorer.** `scripts/python/run_full_trajectory_per_rubric.py` from the Odysseys repository at `95307c76`, unmodified, on its default judge `gemini-3.1-flash-lite-preview`. It grades each rubric item in one call that sees the task, the item's requirement and verification text, the full action history, and every screenshot of the trajectory, and answers success or failure. Its rules include: ground the judgment in what the screenshots and actions show; filters, sorts and forms must be applied and confirmed; an agent that was blocked (CAPTCHA, access denied) and therefore could not satisfy the item fails.
+- **Evidence.** [`scripts/odysseys-official-regrade.py`](scripts/odysseys-official-regrade.py) turns each published attempt into the scorer's `steps.jsonl` format: one row per Dassi model call, with the call's action, its reasoning, and that call's screenshot. 194 tasks have this evidence; the other 6 produced no result and count as failures.
+- **Step budget.** The scorer's default `--max-steps 100` stops reading after step 100. We report no cap (`--max-steps 0`), 200 steps, and the default 100.
+- **Our earlier judge (retired).** Our first figure, 91.5% Perfect, came from our own rubric judge on `gemini-3.5-flash-lite`, with the final 8 screenshots and no blocked-site rule. It is kept in `tasks.csv` as `success` and `rubrics_passed` for comparison.
 
 ### Online-Mind2Web
 

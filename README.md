@@ -8,24 +8,27 @@ Full results, per-task logs and grading details for [Dassi](https://dassi.ai) on
 
 Dassi is a Chrome extension, run as shipped with one attempt per task: release 0.74.1 on its default model `gemini-3.8-flash` for Odysseys and Online-Mind2Web; release 0.80.0 on DeepSeek V4.1 Flash and on `gemini-3.8-flash` for BU Bench V2.
 
-> **How these were graded.** Scores come from automated LLM judges that we ran ourselves: Odysseys and Online-Mind2Web on `gemini-3.5-flash-lite`, BU Bench V2 with Browser Use's own judge code on `gemini-3.8-flash`. Odysseys is graded rubric by rubric. Online-Mind2Web is graded on whether the final result is right, however the agent got there. We also report Online-Mind2Web's own WebJudge, which grades the process too. None of these scores has been submitted to or verified by either benchmark's maintainers. [METHODOLOGY.md](METHODOLOGY.md) lists every difference from the reference protocols.
+> **How these were graded.** Scores come from automated LLM judges that we ran ourselves. Odysseys uses the Odysseys authors' own scorer and default judge model, rubric by rubric. BU Bench V2 uses Browser Use's own judge code on `gemini-3.8-flash`. Online-Mind2Web's headline uses our own judge on `gemini-3.5-flash-lite`. Online-Mind2Web is graded on whether the final result is right, however the agent got there. We also report Online-Mind2Web's own WebJudge, which grades the process too. None of these scores has been submitted to or verified by either benchmark's maintainers. [METHODOLOGY.md](METHODOLOGY.md) lists every difference from the reference protocols.
 
 ## Results
 
 ### Odysseys — 200 tasks
 
+Graded with the Odysseys authors' official scorer, `run_full_trajectory_per_rubric.py` at revision `95307c76`, unmodified, on its default judge `gemini-3.1-flash-lite-preview`.
+
 | Metric | Dassi (`gemini-3.8-flash`) |
 |---|---|
-| Perfect (every rubric passed) | **183 / 200 (91.5%)** |
-| Rubric average | 95.0% |
-| Rubric items passed | 1,159 / 1,225 (94.6%) |
-| Easy / Medium / Hard (Perfect) | 43/45 (95.6%) · 39/46 (84.8%) · 101/109 (92.7%) |
-| Perfect within 100 / 200 model calls | 157 (78.5%) · 182 (91.0%) |
+| Perfect (every rubric passed), no step cap | **170 / 200 (85.0%)** |
+| Perfect within 200 / 100 steps (the scorer's default is 100) | 169 (84.5%) · 150 (75.0%) |
+| Rubric items passed, no step cap | 1,142 / 1,225 (93.2%) |
+| Easy / Medium / Hard (Perfect, no step cap) | 40/45 · 36/46 · 94/109 (86.2%) |
 | Median tool calls per task | 60 |
 | Median time per task | 6 min 2 s |
 | Median model cost per task | $0.66 |
 
-Published Odysseys runs cap the agent at 100 or 200 steps; Dassi ran uncapped. The "within" row counts tasks that were perfect within that many model calls. A Dassi model call can run code that performs several browser actions, so it is not the same unit as one step of a screenshot-and-click agent.
+A Dassi step is one model call, and one call can run code that performs several browser actions, so it is not the same unit as one step of a screenshot-and-click agent. Runs were one attempt per task with a 30-minute limit and no step cap; the step-budget rows count what the scorer grades when it stops reading at that step.
+
+**Why this differs from our first number.** We first published 91.5% Perfect from our own rubric judge. The official scorer fails an item when the site blocked the agent (a CAPTCHA or access-denied page), even if the agent said so honestly and found the information elsewhere; it grades what the trajectory shows rather than the agent's own conclusions; and it needs end-state requirements, such as tabs left open, to be visible. Our runs happen in headless Chrome on a CI server behind one residential proxy, which likely draws more bot checks than a person's own browser would, but the official rule applies to every agent the same way. Per task, `odysseys/tasks.csv` carries both: `success` and `rubrics_passed` from our judge, and the `official_*` columns from the official scorer. The conversion script is [`scripts/odysseys-official-regrade.py`](scripts/odysseys-official-regrade.py).
 
 ### Online-Mind2Web — 300 tasks
 
