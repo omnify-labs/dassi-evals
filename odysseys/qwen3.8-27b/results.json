@@ -1,0 +1,55 @@
+{
+ "dataset": "odysseys",
+ "task_set": "40 of the 200 Odysseys tasks (every fifth task id in tasks.csv order)",
+ "agent": "dassi 0.89.0 plus a benchmark-only pin of the OpenRouter route to the DekaLLM then Parasail hosts (not in any release)",
+ "model": "qwen/qwen3.8-27b on OpenRouter",
+ "reasoning": "high (dassi's main-agent thinking level)",
+ "limits": {
+  "per_task_timeout_s": 3600,
+  "step_cap": null,
+  "attempts": 1
+ },
+ "judge": {
+  "code": "Odysseys authors' scorer, run_full_trajectory_per_rubric.py at 95307c76, unmodified, no step cap",
+  "model": "gemini-3.1-flash-lite-preview"
+ },
+ "overall": {
+  "tasks": 40,
+  "mean_rubric_score_pct": 74.4,
+  "perfect": 27,
+  "status": {
+   "completed": 26,
+   "error": 8,
+   "timeout": 6
+  }
+ },
+ "by_level": {
+  "easy": {
+   "tasks": 9,
+   "perfect": 7
+  },
+  "hard": {
+   "tasks": 21,
+   "perfect": 12
+  },
+  "medium": {
+   "tasks": 10,
+   "perfect": 8
+  }
+ },
+ "time": {
+  "minutes_mean": 26.9,
+  "minutes_median": 22.9,
+  "llm_calls_median": 69.0
+ },
+ "cost": {
+  "per_task_usd": 0.71,
+  "basis": "OpenRouter-billed, measured on the last 15 tasks (one clean run with no failed work). The harness's own per-task cost line is about twice the bill, so it is not published here.",
+  "total_openrouter_spend_usd": 110.55,
+  "total_basis": "whole effort for both benchmarks, including shards lost to container out-of-memory kills, one run that hit exhausted credit, pilots and diagnosis"
+ },
+ "reruns": {
+  "tasks": 9,
+  "reason": "first attempt lost to a killed container (exit 137) or exhausted credit; each re-run once and the re-run counts"
+ }
+}
