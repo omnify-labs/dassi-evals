@@ -1,0 +1,41 @@
+task_id,status,score,perfect,duration_s,llm_calls,input_tokens,cached_input_tokens,output_tokens,note,level
+0ab48db6076089bbcf42047d162009a50eb9ca50,error,0,False,2176,69,692239,4098272,68570,,easy
+0ce94d4e773eff1042a6920232f929a1da98c44d,completed,1,True,2025,93,1026654,6751451,51751,,easy
+440ed7f388a2a4528a8d9fb75f83e11f934b5b5d,completed,1,True,757,61,359198,2915072,38263,,easy
+5e09c06aa92c1e252db5106a72e8d61e59356c7e,completed,1,True,454,46,149212,2045568,24881,,easy
+890a6880049a42684ac91a2e1809442846f9394c,completed,1,True,861,77,827090,4528864,45821,,easy
+8c30f2f9ceeac75b05c725c5397022bb4f9d32a0,completed,1,True,772,50,615801,2238528,32744,first attempt lost to a killed container or exhausted credit; re-run once,easy
+ada70bfe81da1cd33bec47d79a9d279d7734a686,completed,1,True,1979,103,1213495,8665616,88953,,easy
+e15345ed27f1933065af403601876e5f6597a943,completed,1,True,393,38,180631,1610078,18264,,easy
+fb3f6eb23fad9b18c6c612d213d32ea40d891092,error,0.2,False,1970,108,1541421,8151136,78816,,easy
+03328a94fec2dce938ded3959bdb6ea292c22186,error,0.3,False,1335,59,512228,3892736,42325,,hard
+08b3ee12dd124bd3f046bd568260110899dc8695,completed,0.1,False,158,9,77822,313920,9710,,hard
+08e2ad6afc624b6f759afa9950907f470b92f11b,completed,1,True,700,53,405823,3261663,57749,,hard
+20cea7be868a6dbaca0c1ff8a04562101f3fbd91,error,0.2,False,879,20,202161,958592,29569,first attempt lost to a killed container or exhausted credit; re-run once,hard
+265abf0668773a8295847d5f5abf3bd003cbe3a3,timeout,1,True,3600,95,1049717,10768512,107018,first attempt lost to a killed container or exhausted credit; re-run once,hard
+40735c71648c0ca0e6291d534685853acf1122c1,error,0,False,198,20,154592,584632,15913,,hard
+407381583456934981fbca0f1b91e4fa8a0883b2,timeout,0,False,3600,64,1101304,5486702,99432,,hard
+42e2344431639ea57815c2c6b42b047cc7814176,completed,1,True,1504,100,1033717,7089920,77083,first attempt lost to a killed container or exhausted credit; re-run once,hard
+545a1b36d5ada637dea9e0213f0a8c54c31c29dd,timeout,0,False,3600,140,1711799,12349451,80112,first attempt lost to a killed container or exhausted credit; re-run once,hard
+5aaab80dfeee2bad47c26c6a9b706f3dbaf76ab2,completed,1,True,1748,46,1227794,2584596,76019,first attempt lost to a killed container or exhausted credit; re-run once,hard
+73f7a6bce89de66f106a669c85c7908331d3d1b7,error,0.5,False,1731,53,1214280,3950260,67046,,hard
+7e31dc76193fea7e052767ce6ccd65ecb9f2628d,completed,1,True,3257,119,2407143,10112567,132865,,hard
+86cc69e23296a471c4e9e3da30d63ff54f31665f,completed,1,True,583,42,323996,2464256,40003,,hard
+a89f1d8d1b3d2b74d784c82e09c2511e7e1587fd,completed,1,True,1932,69,1238846,5132624,67351,,hard
+b421f308e18fc92b84ed676609e62a2b536b28b7,timeout,0.8,False,3600,187,3400018,19549084,111736,,hard
+c4b9782b4f76679169f1438e1e70addd96d7b518,completed,1,True,2560,120,1006644,11639872,94222,,hard
+ca5c6ddf8b347ee0935c6044fe65cd182e4fb26c,completed,1,True,948,69,799772,4743808,46627,,hard
+d17c0e2905a166df99fa492edc8f7cc5a641de4e,completed,1,True,834,59,639624,2915360,52367,first attempt lost to a killed container or exhausted credit; re-run once,hard
+f23a062af7be0d5a28f1dcb1f06cc79a89dd04d6,timeout,0.3,False,3600,141,2235644,15854992,119299,,hard
+fb2f8bea3fa9528a581ce9e46bcc552c93e186a6,completed,1,True,710,69,349929,3420800,37101,,hard
+feba3355ecae6838d521294bbca8e50cf99f0a53,timeout,1,True,3600,144,1459937,14961920,131485,,hard
+139b0e467c6e335945c64249c22929516253c1bb,completed,1,True,483,54,175743,2693696,28767,,medium
+18ddad3e0781d4b8fb2e1998ff836a0b07d0cdce,completed,1,True,1033,68,602540,4838400,45888,,medium
+29e019b665e4eba930fcb1fc28a149eb6522ed29,completed,1,True,2138,128,1998583,11537024,79955,,medium
+3868f9b52e96067b4f55834a3b110e1228b48e65,completed,1,True,691,74,265184,4530304,39071,,medium
+46ecc9a5dce920d6c72198b4efb1a46855bac7d0,completed,1,True,1153,80,745245,6600256,42134,,medium
+4b9eb54dde6c129b27ccb642ef24fb060e736913,completed,1,True,1338,74,1111945,5916349,52305,first attempt lost to a killed container or exhausted credit; re-run once,medium
+63d68bb25e279fc22e6e3592d8ca59add33b6eb1,error,0.4,False,1412,63,289489,3176890,37367,first attempt lost to a killed container or exhausted credit; re-run once,medium
+cbe12703e129832feb5e7b56c4141476fb423338,completed,1,True,2106,110,1638521,8475133,82511,,medium
+d8fe04d1cf29251d68382cde58f4424e80bad07c,error,0,False,224,29,273684,713684,13583,,medium
+e8b73f739732f8aeb3c473d00f6219af5b8dcdb7,completed,1,True,1842,118,1734256,9470544,79513,,medium

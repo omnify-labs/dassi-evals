@@ -6,7 +6,7 @@ Full results, per-task logs and grading details for [Dassi](https://dassi.ai) on
 - **[Online-Mind2Web](https://github.com/OSU-NLP-Group/Online-Mind2Web)** — 300 tasks across 136 live websites.
 - **[BU Bench V2](https://github.com/browser-use/benchmark)** — 200 long web tasks from Browser Use, graded against weighted findings rubrics. Scores and costs only; see below for why there are no per-task logs.
 
-Dassi is a Chrome extension, run as shipped with one attempt per task: release 0.74.1 on its default model `gemini-3.8-flash` for Odysseys and Online-Mind2Web; release 0.80.0 on DeepSeek V4.1 Flash and on `gemini-3.8-flash` for BU Bench V2.
+Dassi is a Chrome extension, run as shipped with one attempt per task: release 0.74.1 on its default model `gemini-3.8-flash` for Odysseys and Online-Mind2Web; release 0.80.0 on DeepSeek V4.1 Flash and on `gemini-3.8-flash` for BU Bench V2, and release 0.89.0 on Qwen3.8 27B for a BU Bench V2 and Odysseys run.
 
 > **How these were graded.** Scores come from automated LLM judges that we ran ourselves. Odysseys uses the Odysseys authors' own scorer and default judge model, rubric by rubric. BU Bench V2 uses Browser Use's own judge code on `gemini-3.8-flash`. Online-Mind2Web's headline uses our own judge on `gemini-3.5-flash-lite`. Online-Mind2Web is graded on whether the final result is right, however the agent got there. We also report Online-Mind2Web's own WebJudge, which grades the process too. None of these scores has been submitted to or verified by either benchmark's maintainers. [METHODOLOGY.md](METHODOLOGY.md) lists every difference from the reference protocols.
 
@@ -71,6 +71,30 @@ Files: [`bubench-v2/deepseek-v4.1-flash/results.json`](bubench-v2/deepseek-v4.1-
 Same release, task set, harness and judge as the DeepSeek run, at the same reasoning level (high). The judge model here is the same as the agent model, so any self-preference would favour this run. DeepSeek scored higher on 40 of the 54 tasks, Gemini on 9, with 5 ties. Files: [`bubench-v2/gemini-3.8-flash/results.json`](bubench-v2/gemini-3.8-flash/results.json), [`bubench-v2/gemini-3.8-flash/tasks.csv`](bubench-v2/gemini-3.8-flash/tasks.csv).
 
 An earlier 200-task Gemini result (84.7) was graded by our own port of the judge on `gemini-3.5-flash-lite`, which proved far too lenient. It has been withdrawn and its files removed; they remain in this repository's history.
+
+### BU Bench V2 — same 55 tasks, Qwen3.8 27B
+
+| Metric | Dassi (`qwen/qwen3.8-27b`) |
+|---|---|
+| Mean weighted findings score (0 to 100) | **49.7** |
+| Tasks with every rubric item met | 10 / 55 |
+| Completed · timed out · errored | 25 · 22 · 8 |
+| Model cost per task | **$0.71** (OpenRouter-billed, measured on the last 15 tasks) |
+| Time per task | 43.9 min mean · 48.6 min median |
+
+Same task set, harness and judge as the runs above, at the same reasoning level (high), but dassi 0.89.0 on OpenRouter with the route pinned to two hosts, and a 60-minute task limit instead of 30 because half the tasks hit 30 minutes in a pilot. Qwen made a median of 83 model calls per task. 22 tasks hit the 60-minute limit and are graded on their partial evidence. 6 tasks were re-run once because their first attempt was lost to a killed container or exhausted credit; the re-run counts. The whole effort (both benchmarks, including lost shards, pilots and diagnosis) cost $110.55 on OpenRouter. Files: [`bubench-v2/qwen3.8-27b/results.json`](bubench-v2/qwen3.8-27b/results.json), [`bubench-v2/qwen3.8-27b/tasks.csv`](bubench-v2/qwen3.8-27b/tasks.csv).
+
+### Odysseys — 40-task sample, Qwen3.8 27B
+
+| Metric | Dassi (`qwen/qwen3.8-27b`) |
+|---|---|
+| Perfect (every rubric passed) | **27 / 40 (67.5%)** |
+| Mean rubric score | 74.4% |
+| Easy / Medium / Hard (Perfect) | 7/9 · 8/10 · 12/21 |
+| Completed · timed out · errored | 26 · 6 · 8 |
+| Time per task | 26.9 min mean · 22.9 min median |
+
+A sample of every fifth task id in `odysseys/tasks.csv` order, not the full 200, so expect about 8 points of sampling noise, and it is not directly comparable to the 200-task Gemini row above. Graded with the authors' scorer at `95307c76` on `gemini-3.1-flash-lite-preview`, no step cap, 60-minute task limit. 9 tasks were re-run once after a lost first attempt. Files: [`odysseys/qwen3.8-27b/results.json`](odysseys/qwen3.8-27b/results.json), [`odysseys/qwen3.8-27b/tasks.csv`](odysseys/qwen3.8-27b/tasks.csv).
 
 Browser Use asks that decrypted tasks and traces not be published, so the BU Bench V2 folders have no task text, answers, sessions or screenshots.
 
